@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="resto">
+  <ClassDiagramComponents>
+    <Class name="Reserva" package="" visibility="public" xPosition="154.0" yPosition="481.0">
+      <Fields>
+        <Field name="idReserva" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="estado" type="Boolean" visibility="private"/>
+        <Field name="dni" type="int" visibility="private"/>
+        <Field name="fecha" type="Date" visibility="private"/>
+        <Field name="hora" type="Time" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Mesa" package="" visibility="public" xPosition="154.0" yPosition="54.0">
+      <Fields>
+        <Field name="idMesa" type="int" visibility="private"/>
+        <Field name="estado" type="Boolean" visibility="private"/>
+        <Field name="numero" type="int" visibility="private"/>
+        <Field name="capacidad" type="int" visibility="private"/>
+        <Field name="reserva" type="Reserva" visibility="private"/>
+        <Field name="pedidos" type="List&lt;Pedido&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Pedido" package="" visibility="public" xPosition="662.0" yPosition="69.0">
+      <Fields>
+        <Field name="idPedido" type="int" visibility="private"/>
+        <Field name="untitledField" type="Object" visibility="private"/>
+        <Field name="estado" type="Boolean" visibility="private"/>
+        <Field name="fecha" type="Date" visibility="private"/>
+        <Field name="mesa" type="Mesa" visibility="private"/>
+        <Field name="mesero" type="Mesero" visibility="private"/>
+        <Field name="productos" type="List&lt;Productos&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Producto" package="" visibility="public" xPosition="1119.0" yPosition="111.0">
+      <Fields>
+        <Field name="idProducto" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="cantidad" type="int" visibility="private"/>
+        <Field name="precio" type="double" visibility="private"/>
+        <Field name="codigo" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Mesero" package="" visibility="public" xPosition="619.0" yPosition="443.0">
+      <Fields>
+        <Field name="idMesero" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="dni" type="int" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="pedidos" type="List&lt;Pedido&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="tiene" source="Mesa" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
