@@ -33,7 +33,6 @@
     <Class name="Pedido" package="" visibility="public" xPosition="662.0" yPosition="69.0">
       <Fields>
         <Field name="idPedido" type="int" visibility="private"/>
-        <Field name="untitledField" type="Object" visibility="private"/>
         <Field name="estado" type="Boolean" visibility="private"/>
         <Field name="fecha" type="Date" visibility="private"/>
         <Field name="mesa" type="Mesa" visibility="private"/>
@@ -73,11 +72,11 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesa" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
-    <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
