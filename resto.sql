@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 16:49:42
+-- Tiempo de generación: 03-10-2023 a las 16:27:15
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -31,9 +31,7 @@ CREATE TABLE `mesa` (
   `idMesa` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `numero` int(11) NOT NULL,
-  `capacidad` int(11) NOT NULL,
-  `idReserva` int(11) NOT NULL,
-  `idPedido` int(11) NOT NULL
+  `capacidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,10 +42,9 @@ CREATE TABLE `mesa` (
 
 CREATE TABLE `mesero` (
   `idMesero` int(11) NOT NULL,
-  `idPedido` int(11) NOT NULL,
   `nombre` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
-  `contraseña` varchar(50) NOT NULL
+  `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -73,7 +70,6 @@ CREATE TABLE `pedido` (
 
 CREATE TABLE `producto` (
   `idProducto` int(11) NOT NULL,
-  `idPedido` int(11) NOT NULL,
   `precio` double NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `codigo` int(11) NOT NULL,
@@ -96,6 +92,18 @@ CREATE TABLE `reserva` (
   `idMesa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
+CREATE TABLE `user` (
+  `idUser` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -105,9 +113,7 @@ CREATE TABLE `reserva` (
 --
 ALTER TABLE `mesa`
   ADD PRIMARY KEY (`idMesa`),
-  ADD UNIQUE KEY `numero` (`numero`),
-  ADD KEY `idPedido` (`idPedido`),
-  ADD KEY `idReserva` (`idReserva`);
+  ADD UNIQUE KEY `numero` (`numero`);
 
 --
 -- Indices de la tabla `mesero`
@@ -115,7 +121,7 @@ ALTER TABLE `mesa`
 ALTER TABLE `mesero`
   ADD PRIMARY KEY (`idMesero`),
   ADD UNIQUE KEY `dni` (`dni`),
-  ADD KEY `idPedido` (`idPedido`);
+  ADD KEY `idUser` (`idUser`);
 
 --
 -- Indices de la tabla `pedido`
@@ -131,8 +137,7 @@ ALTER TABLE `pedido`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`idProducto`),
-  ADD UNIQUE KEY `codigo` (`codigo`),
-  ADD KEY `idPedido` (`idPedido`);
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Indices de la tabla `reserva`
@@ -140,6 +145,13 @@ ALTER TABLE `producto`
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`idReserva`),
   ADD KEY `idMesa` (`idMesa`);
+
+--
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`idUser`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -176,21 +188,20 @@ ALTER TABLE `reserva`
   MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de la tabla `user`
 --
+ALTER TABLE `user`
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Filtros para la tabla `mesa`
+-- Restricciones para tablas volcadas
 --
-ALTER TABLE `mesa`
-  ADD CONSTRAINT `mesa_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `mesa_ibfk_2` FOREIGN KEY (`idReserva`) REFERENCES `reserva` (`idReserva`);
 
 --
 -- Filtros para la tabla `mesero`
 --
 ALTER TABLE `mesero`
-  ADD CONSTRAINT `mesero_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`);
+  ADD CONSTRAINT `mesero_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
 
 --
 -- Filtros para la tabla `pedido`
@@ -199,12 +210,6 @@ ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesa` (`idMesa`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idMesero`) REFERENCES `mesero` (`idMesero`),
   ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
-
---
--- Filtros para la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`);
 
 --
 -- Filtros para la tabla `reserva`
