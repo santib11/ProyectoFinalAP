@@ -3,10 +3,10 @@ package Model;
 
 public class Producto {
     private int idProducto;
-    private int code;
-    private int cant;
-    private String name;
-    private double price;
+    private int codigo;
+    private int cantidad;
+    private String nombre;
+    private double precio;
     
     
 }
