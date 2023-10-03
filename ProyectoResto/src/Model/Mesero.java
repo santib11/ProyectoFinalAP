@@ -8,21 +8,24 @@ public class Mesero {
     String nombre;
     int dni;
     List<Pedido> pedidos;
+    User user;
 
     public Mesero() {
     }
 
-    public Mesero(String nombre, int dni, List<Pedido> pedidos) {
+    public Mesero(String nombre, int dni, List<Pedido> pedidos, User user) {
         this.nombre = nombre;
         this.dni = dni;
         this.pedidos = pedidos;
+        this.user = user;
     }
 
-    public Mesero(int idMesero, String nombre, int dni, List<Pedido> pedidos) {
+    public Mesero(int idMesero, String nombre, int dni, List<Pedido> pedidos, User user) {
         this.idMesero = idMesero;
         this.nombre = nombre;
         this.dni = dni;
         this.pedidos = pedidos;
+        this.user = user;
     }
 
     public int getIdMesero() {
@@ -55,6 +58,14 @@ public class Mesero {
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     
