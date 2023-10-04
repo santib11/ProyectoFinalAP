@@ -4,16 +4,16 @@ package Model;
 public class Producto {
     private int idProducto;
     private int codigo;
-    private int cantidad;
+    private int stock;
     private String nombre;
     private double precio;
-
+    
     public Producto() {
     }
-
+        
     public Producto(int codigo, int cantidad, String nombre, double precio) {
         this.codigo = codigo;
-        this.cantidad = cantidad;
+        this.stock = cantidad;
         this.nombre = nombre;
         this.precio = precio;
     }
@@ -21,7 +21,7 @@ public class Producto {
     public Producto(int idProducto, int codigo, int cantidad, String nombre, double precio) {
         this.idProducto = idProducto;
         this.codigo = codigo;
-        this.cantidad = cantidad;
+        this.stock = cantidad;
         this.nombre = nombre;
         this.precio = precio;
     }
@@ -42,12 +42,12 @@ public class Producto {
         this.codigo = codigo;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public String getNombre() {
@@ -66,5 +66,5 @@ public class Producto {
         this.precio = precio;
     }
     
-    
+   
 }

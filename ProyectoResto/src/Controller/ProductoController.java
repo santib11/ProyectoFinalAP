@@ -19,14 +19,14 @@ public class ProductoController {
     
     //INSERTAR
      public void altaProducto(Producto producto){
-        String sql = "INSERT INTO producto (idProducto, precio, nombre, codigo, cantidad) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO producto (idProducto, precio, nombre, codigo, stock) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, producto.getIdProducto());
             ps.setDouble(2, producto.getPrecio());
             ps.setString(3, producto.getNombre());
             ps.setInt(4, producto.getCodigo());
-            ps.setInt(5, producto.getCantidad());
+            ps.setInt(5, producto.getStock());
            
            
             ps.executeUpdate();
@@ -51,7 +51,7 @@ public class ProductoController {
                 producto.setIdProducto(id);
                 producto.setCodigo(rs.getInt("codigo"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setCantidad(rs.getInt("cantidad"));
+                producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
             }else {
                 JOptionPane.showMessageDialog(null, "No existe el producto con ese id");
@@ -66,12 +66,12 @@ public class ProductoController {
     
     //MODIFICAR
     public void modificarProducto(Producto producto){
-        String sql = "UPDATE producto SET codigo = ?, cantidad = ?, nombre = ?, precio = ? WHERE idProducto = ?";
+        String sql = "UPDATE producto SET codigo = ?, stock = ?, nombre = ?, precio = ? WHERE idProducto = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
            
             ps.setInt(1, producto.getCodigo());
-            ps.setInt(2, producto.getCantidad());
+            ps.setInt(2, producto.getStock());
             ps.setString(3, producto.getNombre());
             ps.setDouble(4, producto.getPrecio());
             int resultado = ps.executeUpdate();

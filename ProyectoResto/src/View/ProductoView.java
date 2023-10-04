@@ -40,7 +40,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jtCodigo = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
         jtPrecio = new javax.swing.JTextField();
-        jtCantidad = new javax.swing.JTextField();
+        jtStock = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
@@ -62,7 +62,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jLabel4.setText("Precio ");
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Cantidad");
+        jLabel5.setText("Stock");
 
         jbBuscar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jbBuscar.setText("Buscar");
@@ -132,7 +132,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
                                 .addComponent(jtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                                 .addComponent(jtNombre)
                                 .addComponent(jtPrecio)
-                                .addComponent(jtCantidad))
+                                .addComponent(jtStock))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbBuscar)
                             .addGap(22, 22, 22)))
@@ -161,7 +161,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
                     .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -183,7 +183,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
             Producto prod = pc.buscarProducto(cod);
             jtNombre.setText(prod.getNombre());
             jtPrecio.setText(prod.getPrecio()+"");
-            jtCantidad.setText(prod.getCantidad() +"");
+            jtStock.setText(prod.getStock() +"");
             //jbEliminar.setVisible(prod.isEstado());
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "El codigo debe estar conformado por numeros", "Editar codigo", JOptionPane.WARNING_MESSAGE);
@@ -204,7 +204,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
             double precio = Double.valueOf(jtPrecio.getText()); // pasar a double
             String nombre = jtNombre.getText();
             int codigo = Integer.parseInt(jtCodigo.getText());
-            int cantidad =Integer.parseInt(jtCantidad.getText());
+            int cantidad =Integer.parseInt(jtStock.getText());
              
 
             Producto prod = new Producto(cod,cantidad,nombre,precio);
@@ -215,7 +215,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jtPrecio.setText("");
         jtNombre.setText("");
         jtCodigo.setText("");
-        jtCantidad.setText("");
+        jtStock.setText("");
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -226,10 +226,10 @@ public class ProductoView extends javax.swing.JInternalFrame {
             double precio = Double.parseDouble(jtPrecio.getText()); //pasar a double
             String nombre = jtNombre.getText();
             int codigo = Integer.parseInt(jtCodigo.getText());
-            int cantidad =Integer.parseInt(jtCantidad.getText());
+            int stock =Integer.parseInt(jtStock.getText());
              
 
-            Producto prod = new Producto(cod,cantidad,nombre,precio);
+            Producto prod = new Producto(cod,stock,nombre,precio);
          
             pc.modificarProducto(prod);
         }catch(NumberFormatException ex){
@@ -238,7 +238,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
          jtPrecio.setText("");
         jtNombre.setText("");
         jtCodigo.setText("");
-        jtCantidad.setText("");
+        jtStock.setText("");
         
     }//GEN-LAST:event_jbModificarActionPerformed
 
@@ -254,7 +254,7 @@ public class ProductoView extends javax.swing.JInternalFrame {
         jtPrecio.setText("");
         jtNombre.setText("");
         jtCodigo.setText("");
-        jtCantidad.setText("");
+        jtStock.setText("");
         
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -270,10 +270,10 @@ public class ProductoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JTextField jtCantidad;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPrecio;
+    private javax.swing.JTextField jtStock;
     private java.awt.Label label1;
     // End of variables declaration//GEN-END:variables
 }
