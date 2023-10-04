@@ -1,21 +1,21 @@
+
 package View;
 
-import Model.Reserva;
 import javax.swing.table.DefaultTableModel;
 
-public class ReservaView extends javax.swing.JFrame {
+public class ProductoView extends javax.swing.JFrame {
 
-    private DefaultTableModel modelReserva = new DefaultTableModel() {
+    private DefaultTableModel modelProducto = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
-
-    public ReservaView() {
+    
+    public ProductoView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        editModelReservas();
-        loadTableReservas();
+        editModelProductos();
+        loadTableProductos();
     }
 
     @SuppressWarnings("unchecked")
@@ -23,24 +23,34 @@ public class ReservaView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jButtonCrerProducto = new javax.swing.JButton();
+        jButtonQuitarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableReservas = new javax.swing.JTable();
-        jButtonCrearReserva = new javax.swing.JButton();
-        jButtonMarcarReserva = new javax.swing.JButton();
+        jTableProductos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jButtonBack = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Reservas");
+        jButtonCrerProducto.setText("Nuevo producto");
+        jButtonCrerProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrerProductoActionPerformed(evt);
+            }
+        });
 
-        jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
+        jButtonQuitarProducto.setText("Quitar producto");
+        jButtonQuitarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonQuitarProductoActionPerformed(evt);
+            }
+        });
+
+        jTableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,59 +61,46 @@ public class ReservaView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableReservas);
+        jScrollPane1.setViewportView(jTableProductos);
 
-        jButtonCrearReserva.setText("Nueva reserva");
-        jButtonCrearReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCrearReservaActionPerformed(evt);
-            }
-        });
-
-        jButtonMarcarReserva.setText("Quitar reserva");
-        jButtonMarcarReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMarcarReservaActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Productos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
-                        .addComponent(jLabel1)))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addComponent(jButtonCrearReserva)
+                .addGap(130, 130, 130)
+                .addComponent(jButtonCrerProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonMarcarReserva)
-                .addGap(127, 127, 127))
+                .addComponent(jButtonQuitarProducto)
+                .addGap(105, 105, 105))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(287, 287, 287))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCrearReserva)
-                    .addComponent(jButtonMarcarReserva))
+                    .addComponent(jButtonQuitarProducto)
+                    .addComponent(jButtonCrerProducto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(24, 24, 24))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
 
         jButtonBack.setText("Volver");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -112,23 +109,25 @@ public class ReservaView extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(jButtonBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(27, 27, 27))
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addComponent(jButtonBack)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2))
@@ -152,13 +151,13 @@ public class ReservaView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCrearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearReservaActionPerformed
+    private void jButtonCrerProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrerProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCrearReservaActionPerformed
+    }//GEN-LAST:event_jButtonCrerProductoActionPerformed
 
-    private void jButtonMarcarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcarReservaActionPerformed
+    private void jButtonQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonMarcarReservaActionPerformed
+    }//GEN-LAST:event_jButtonQuitarProductoActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         this.setVisible(false);
@@ -169,34 +168,34 @@ public class ReservaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
-    private javax.swing.JButton jButtonCrearReserva;
-    private javax.swing.JButton jButtonMarcarReserva;
+    private javax.swing.JButton jButtonCrerProducto;
+    private javax.swing.JButton jButtonQuitarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableReservas;
+    private javax.swing.JTable jTableProductos;
     // End of variables declaration//GEN-END:variables
 
-    private void editModelReservas() {
-        modelReserva.addColumn("Nombre");
-        modelReserva.addColumn("Dni");
-        modelReserva.addColumn("Fecha");
-        modelReserva.addColumn("Hora");
-        modelReserva.addColumn("Nro mesa");
-        jTableReservas.setModel(modelReserva);
+    private void editModelProductos() {
+        modelProducto.addColumn("Codigo");
+        modelProducto.addColumn("Nombre");
+        modelProducto.addColumn("Stock");
+        modelProducto.addColumn("Precio");
+        modelProducto.addColumn("Descripcion");
+        jTableProductos.setModel(modelProducto);
     }
 
-    private void loadTableReservas() {
-//        ReservaController rController = new ReservaController();
-//        for (Reserva r : rController.getReservaActiva()) {
-//            modelReserva.addRow(new Object[]{
-//                r.getNombre(),
-//                r.getDni(),
-//                r.getFecha(),
-//                r.getHora(),
-//                r.getMesa().getNumero()
+    private void loadTableProductos() {
+//        ProductoController pController = new ProductoController();
+//        for (Producto p : pController.getAllProductos()) {
+//            modelProducto.addRow(new Object[]{
+//                p.getCodigo(),
+//                p.getNombre(),
+//                p.getStock(),
+//                p.getPrecio(),
+//                p.getDescripcion
 //            });
 //        }
     }
