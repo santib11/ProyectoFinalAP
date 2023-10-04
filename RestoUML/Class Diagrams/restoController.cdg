@@ -2,7 +2,7 @@
 
 <ClassDiagram name="restoController">
   <ClassDiagramComponents>
-    <Class name="ProductoController" package="" visibility="public" xPosition="996.0" yPosition="123.0">
+    <Class name="ProductoController" package="" visibility="public" xPosition="587.0" yPosition="123.0">
       <Fields>
         <Field name="con" type="Connection" visibility="private"/>
       </Fields>
@@ -24,7 +24,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="PedidoController" package="" visibility="public" xPosition="625.0" yPosition="142.0">
+    <Class name="PedidoController" package="" visibility="public" xPosition="195.0" yPosition="142.0">
       <Fields>
         <Field name="con" type="Connecion" visibility="private"/>
         <Field name="mesaController" type="MesaController" visibility="private"/>
