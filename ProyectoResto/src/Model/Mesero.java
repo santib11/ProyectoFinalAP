@@ -13,6 +13,12 @@ public class Mesero {
     public Mesero() {
     }
 
+    public Mesero(String nombre, int dni, User user) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.user = user;
+    }
+    
     public Mesero(String nombre, int dni, List<Pedido> pedidos, User user) {
         this.nombre = nombre;
         this.dni = dni;

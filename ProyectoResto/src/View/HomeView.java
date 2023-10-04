@@ -15,6 +15,8 @@ public class HomeView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelUser = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jButtonReserva = new javax.swing.JButton();
+        jButtonPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,15 +48,39 @@ public class HomeView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
 
+        jButtonReserva.setText("Manejar reservas");
+        jButtonReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservaActionPerformed(evt);
+            }
+        });
+
+        jButtonPedido.setText("Manejar pedidos");
+        jButtonPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPedidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(jButtonReserva)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonPedido)
+                .addGap(272, 272, 272))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonPedido)
+                    .addComponent(jButtonReserva))
+                .addContainerGap(556, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,7 +107,17 @@ public class HomeView extends javax.swing.JFrame {
         uv.setVisible(true);
     }//GEN-LAST:event_jLabelUserMouseClicked
 
+    private void jButtonReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReservaActionPerformed
+
+    private void jButtonPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonPedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonPedido;
+    private javax.swing.JButton jButtonReserva;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

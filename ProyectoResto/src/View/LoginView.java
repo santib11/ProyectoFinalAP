@@ -1,11 +1,16 @@
 
 package View;
 
+import Controller.MeseroController;
 import Controller.UserController;
+import Model.Mesero;
+import Model.User;
 import javax.swing.JOptionPane;
 
 public class LoginView extends javax.swing.JFrame {
 
+    public static Mesero mesero = null;
+    
     public LoginView() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -129,18 +134,19 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        UserController mController = new UserController();
+        UserController uController = new UserController();
+        MeseroController mController = new MeseroController();
         String username = jTextFieldUsername.getText();
         String password = jTextFieldPassword.getText();
-//        int idUser = mController.getUserId(username, password);
-//        if (idUser =! 0) {
-//            this.setVisible(false);
-//            HomeView hv = new HomeView();
-//            hv.setVisible(true);
-//        }else{
-//            JOptionPane.showMessageDialog(this, "Usuario y/o contraseña invalido", "Login", JOptionPane.WARNING_MESSAGE);
-//        }
-        
+        User user = uController.buscarUser(username, password);
+        if (user != null) {
+            mesero = mController.buscarMesero(user.getIdUser());
+            this.setVisible(false);
+            HomeView hv = new HomeView();
+            hv.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario y/o contraseña invalido", "Login", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed

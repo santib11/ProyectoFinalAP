@@ -9,6 +9,11 @@ public class User {
     public User() {
     }
 
+    public User(String usuario, String password) {
+        this.usuario = usuario;
+        this.password = password;
+    }
+    
     public User(int idUser, String usuario, String password) {
         this.idUser = idUser;
         this.usuario = usuario;
