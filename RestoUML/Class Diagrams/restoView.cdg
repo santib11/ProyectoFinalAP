@@ -2,20 +2,31 @@
 
 <ClassDiagram name="restoView">
   <ClassDiagramComponents>
-    <Class name="HomeView" package="" visibility="public" xPosition="270.0" yPosition="118.0">
+    <Class name="HomeView" package="" visibility="public" xPosition="238.0" yPosition="118.0">
       <Fields/>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="jLabelUserMouseClicked" returnType="void" visibility="private"/>
+      </Methods>
     </Class>
-    <Class name="LoginView" package="" visibility="public" xPosition="581.0" yPosition="118.0">
+    <Class name="LoginView" package="" visibility="public" xPosition="552.0" yPosition="118.0">
       <Fields/>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="main" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="jButtonRegisterActionPerformed" returnType="void" visibility="private"/>
+        <Method name="jButtonLoginActionPerformed" returnType="void" visibility="private"/>
+      </Methods>
     </Class>
-    <Class name="RegistroView" package="" visibility="public" xPosition="900.0" yPosition="118.0">
+    <Class name="RegisterView" package="" visibility="public" xPosition="900.0" yPosition="118.0">
       <Fields/>
       <Constructors/>
-      <Methods/>
+      <Methods>
+        <Method name="jButtonBackActionPerformed" returnType="void" visibility="private"/>
+        <Method name="jButtonRegisterActionPerformed" returnType="void" visibility="private"/>
+      </Methods>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations/>
