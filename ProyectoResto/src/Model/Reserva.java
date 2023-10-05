@@ -5,12 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reserva {
-    int idReserva;
-    String nombre;
-    int dni;
-    boolean estado;
-    LocalDate fecha;
-    LocalTime hora;
+    private int idReserva;
+    private String nombre;
+    private int dni;
+    private boolean estado;
+    private LocalDate fecha;
+    private LocalTime hora;
+    private Mesa mesa;
 
     public Reserva() {
     }
@@ -30,6 +31,14 @@ public class Reserva {
         this.estado = estado;
         this.fecha = fecha;
         this.hora = hora;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
     public int getIdReserva() {

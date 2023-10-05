@@ -4,11 +4,11 @@ package Model;
 import java.util.List;
 
 public class Mesero {
-    int idMesero;
-    String nombre;
-    int dni;
-    List<Pedido> pedidos;
-    User user;
+    private int idMesero;
+    private String nombre;
+    private int dni;
+    private List<Pedido> pedidos;
+    private User user;
 
     public Mesero() {
     }

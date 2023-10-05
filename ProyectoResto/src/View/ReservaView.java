@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ReservaController;
 import Model.Reserva;
 import javax.swing.table.DefaultTableModel;
 
@@ -189,15 +190,15 @@ public class ReservaView extends javax.swing.JFrame {
     }
 
     private void loadTableReservas() {
-//        ReservaController rController = new ReservaController();
-//        for (Reserva r : rController.getReservaActiva()) {
-//            modelReserva.addRow(new Object[]{
-//                r.getNombre(),
-//                r.getDni(),
-//                r.getFecha(),
-//                r.getHora(),
-//                r.getMesa().getNumero()
-//            });
-//        }
+        ReservaController rController = new ReservaController();
+        for (Reserva r : rController.getAllReserva()) {
+            modelReserva.addRow(new Object[]{
+                r.getNombre(),
+                r.getDni(),
+                r.getFecha(),
+                r.getHora(),
+                r.getMesa().getNumero()
+            });
+        }
     }
 }

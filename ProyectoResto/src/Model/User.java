@@ -2,9 +2,9 @@
 package Model;
 
 public class User {
-    int idUser;
-    String usuario;
-    String password;
+    private int idUser;
+    private String usuario;
+    private String password;
 
     public User() {
     }

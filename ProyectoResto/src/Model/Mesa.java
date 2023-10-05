@@ -4,30 +4,27 @@ package Model;
 import java.util.List;
 
 public class Mesa {
-    int idMesa;
-    int numero;
-    int capacidad;
-    boolean estado;
-    Reserva reserva;
-    List<Pedido> pedidos;
+    private int idMesa;
+    private int numero;
+    private int capacidad;
+    private boolean estado;
+    private List<Pedido> pedidos;
 
     public Mesa() {
     }
 
-    public Mesa(int numero, int capacidad, boolean estado, Reserva reserva, List<Pedido> pedidos) {
+    public Mesa(int numero, int capacidad, boolean estado, List<Pedido> pedidos) {
         this.numero = numero;
         this.capacidad = capacidad;
         this.estado = estado;
-        this.reserva = reserva;
         this.pedidos = pedidos;
     }
 
-    public Mesa(int idMesa, int numero, int capacidad, boolean estado, Reserva reserva, List<Pedido> pedidos) {
+    public Mesa(int idMesa, int numero, int capacidad, boolean estado, List<Pedido> pedidos) {
         this.idMesa = idMesa;
         this.numero = numero;
         this.capacidad = capacidad;
         this.estado = estado;
-        this.reserva = reserva;
         this.pedidos = pedidos;
     }
 
@@ -61,14 +58,6 @@ public class Mesa {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
-    }
-
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
     }
 
     public List<Pedido> getPedidos() {

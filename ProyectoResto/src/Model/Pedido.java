@@ -5,12 +5,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Pedido {
-    int idPedido;
-    boolean estado;
-    LocalDate fecha;
-    Mesa mesa;
-    Mesero mesero;
-    List<Producto> productos;
+    private int idPedido;
+    private boolean estado;
+    private LocalDate fecha;
+    private Mesa mesa;
+    private Mesero mesero;
+    private List<Producto> productos;
 
     public Pedido() {
     }
