@@ -6,6 +6,8 @@ public class HomeView extends javax.swing.JFrame {
     public HomeView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jLabelName.setText(LoginView.mesero.getNombre());
+        System.out.println(LoginView.mesero.getNombre());
     }
 
     @SuppressWarnings("unchecked")
@@ -15,6 +17,7 @@ public class HomeView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelUser = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
+        jLabelName = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonReserva = new javax.swing.JButton();
         jButtonProducto = new javax.swing.JButton();
@@ -41,6 +44,8 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        jLabelName.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -49,6 +54,8 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jButtonExit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jLabelUser)
                 .addGap(28, 28, 28))
         );
@@ -60,7 +67,9 @@ public class HomeView extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButtonExit)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonExit)
+                    .addComponent(jLabelName))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,6 +195,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProducto;
     private javax.swing.JButton jButtonReserva;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

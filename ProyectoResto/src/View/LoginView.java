@@ -138,7 +138,6 @@ public class LoginView extends javax.swing.JFrame {
         MeseroController mController = new MeseroController();
         String username = jTextFieldUsername.getText();
         String password = jPasswordField.getText();
-        System.out.println(password);
         User user = uController.buscarUser(username, password);
         if (user != null) {
             mesero = mController.buscarMesero(user.getIdUser());
