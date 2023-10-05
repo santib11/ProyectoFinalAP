@@ -13,7 +13,6 @@ public class HomeView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabelUser = new javax.swing.JLabel();
         jButtonExit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonReserva = new javax.swing.JButton();
@@ -26,13 +25,6 @@ public class HomeView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-
-        jLabelUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
-        jLabelUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelUserMouseClicked(evt);
-            }
-        });
 
         jButtonExit.setText("Salir");
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
@@ -48,20 +40,14 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jButtonExit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelUser)
-                .addGap(28, 28, 28))
+                .addContainerGap(687, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelUser)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jButtonExit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
@@ -156,12 +142,6 @@ public class HomeView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUserMouseClicked
-        this.setVisible(false);
-        UserView uv = new UserView();
-        uv.setVisible(true);
-    }//GEN-LAST:event_jLabelUserMouseClicked
-
     private void jButtonReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservaActionPerformed
         this.setVisible(false);
         ReservaView rv = new ReservaView();
@@ -186,7 +166,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProducto;
     private javax.swing.JButton jButtonReserva;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelUser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
