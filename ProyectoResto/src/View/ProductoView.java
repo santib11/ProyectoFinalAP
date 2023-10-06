@@ -1,6 +1,8 @@
 
 package View;
 
+import Controller.ProductoController;
+import Model.Producto;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductoView extends javax.swing.JFrame {
@@ -15,7 +17,7 @@ public class ProductoView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         editModelProductos();
-        loadTableProductos();
+        //loadTableProductos();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,6 +147,9 @@ public class ProductoView extends javax.swing.JFrame {
 
     private void jButtonCrerProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrerProductoActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        ProductoVentanaView pvv = new ProductoVentanaView();
+        pvv.setVisible(true); 
     }//GEN-LAST:event_jButtonCrerProductoActionPerformed
 
     private void jButtonQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProductoActionPerformed
@@ -178,16 +183,24 @@ public class ProductoView extends javax.swing.JFrame {
         jTableProductos.setModel(modelProducto);
     }
 
-    private void loadTableProductos() {
-//        ProductoController pController = new ProductoController();
-//        for (Producto p : pController.getAllProductos()) {
-//            modelProducto.addRow(new Object[]{
-//                p.getCodigo(),
-//                p.getNombre(),
-//                p.getStock(),
-//                p.getPrecio(),
-//                p.getDescripcion
-//            });
-//        }
+   /* private void loadTableProductos(Producto prod) {
+        ProductoController pController = new ProductoController();
+        for (Producto p : pController.listarProductos()) {
+            modelProducto.addRow(new Object[]{
+                p.getCodigo(),
+                p.getNombre(),
+                p.getStock(),
+                p.getPrecio(),
+                
+           });
+        }
     }
+    */
+    
+    private void eliminarProducto(int id){
+        ProductoController pc = new ProductoController();
+        pc.eliminarProductoFisicamente(id);
+    }
+    
+    
 }
