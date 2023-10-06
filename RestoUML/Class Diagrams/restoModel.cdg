@@ -119,6 +119,7 @@
         <Field name="mesero" type="Mesero" visibility="private"/>
         <Field name="productos" type="List&lt;Producto&gt;" visibility="private"/>
         <Field name="hora" type="LocalTime" visibility="private"/>
+        <Field name="importe" type="Double" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -166,6 +167,10 @@
         <Method name="getHora" returnType="LocalTime" visibility="public"/>
         <Method name="setHora" returnType="void" visibility="public">
           <Argument type="LocalTime" name="hora"/>
+        </Method>
+        <Method name="getImporte" returnType="void" visibility="public"/>
+        <Method name="setImporte" returnType="void" visibility="public">
+          <Argument type="Double" name="importe"/>
         </Method>
       </Methods>
     </Class>
@@ -292,12 +297,12 @@
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesero" target="User" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Mesa" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>

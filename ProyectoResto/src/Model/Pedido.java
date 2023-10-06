@@ -13,6 +13,7 @@ public class Pedido {
     private Mesa mesa;
     private Mesero mesero;
     private List<Producto> productos;
+    private double importe;
 
     public Pedido() {
     }
@@ -36,6 +37,14 @@ public class Pedido {
 
     public int getIdPedido() {
         return idPedido;
+    }
+
+    public double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
     }
 
     public void setIdPedido(int idPedido) {
