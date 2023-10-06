@@ -2,12 +2,14 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Pedido {
     private int idPedido;
     private boolean estado;
     private LocalDate fecha;
+    private LocalTime hora;
     private Mesa mesa;
     private Mesero mesero;
     private List<Producto> productos;
@@ -50,6 +52,14 @@ public class Pedido {
 
     public LocalDate getFecha() {
         return fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
     }
 
     public void setFecha(LocalDate fecha) {

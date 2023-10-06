@@ -2,7 +2,7 @@
 
 <ClassDiagram name="resto">
   <ClassDiagramComponents>
-    <Class name="Reserva" package="" visibility="public" xPosition="20.0" yPosition="626.0">
+    <Class name="Reserva" package="" visibility="public" xPosition="27.0" yPosition="626.0">
       <Fields>
         <Field name="idReserva" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -10,6 +10,7 @@
         <Field name="dni" type="int" visibility="private"/>
         <Field name="fecha" type="LocalDate" visibility="private"/>
         <Field name="hora" type="LocalTime" visibility="private"/>
+        <Field name="mesa" type="Mesa" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -31,28 +32,32 @@
           <Argument type="LocalTime" name="hora"/>
         </Method>
         <Method name="getIdReserva" returnType="int" visibility="public"/>
-        <Method name="setIdReserva" returnType="int" visibility="public">
+        <Method name="setIdReserva" returnType="void" visibility="public">
           <Argument type="int" name="idReserva"/>
         </Method>
         <Method name="getNombre" returnType="String" visibility="public"/>
-        <Method name="setNombre" returnType="String" visibility="public">
+        <Method name="setNombre" returnType="void" visibility="public">
           <Argument type="String" name="nombre"/>
         </Method>
         <Method name="getEstado" returnType="boolean" visibility="public"/>
-        <Method name="setEstado" returnType="boolean" visibility="public">
+        <Method name="setEstado" returnType="void" visibility="public">
           <Argument type="boolean" name="estado"/>
         </Method>
         <Method name="getDni" returnType="int" visibility="public"/>
-        <Method name="setDni" returnType="int" visibility="public">
+        <Method name="setDni" returnType="void" visibility="public">
           <Argument type="int" name="dni"/>
         </Method>
         <Method name="getFecha" returnType="LocalDate" visibility="public"/>
-        <Method name="setFecha" returnType="LocalDate" visibility="public">
+        <Method name="setFecha" returnType="void" visibility="public">
           <Argument type="LocalDate" name="fecha"/>
         </Method>
         <Method name="getHora" returnType="LocalTime" visibility="public"/>
-        <Method name="setHora" returnType="LocalTime" visibility="public">
+        <Method name="setHora" returnType="void" visibility="public">
           <Argument type="LocalTime" name="hora"/>
+        </Method>
+        <Method name="getMesa" returnType="Mesa" visibility="public"/>
+        <Method name="setMesa" returnType="void" visibility="public">
+          <Argument type="Mesa" name="mesa"/>
         </Method>
       </Methods>
     </Class>
@@ -62,7 +67,6 @@
         <Field name="estado" type="boolean" visibility="private"/>
         <Field name="numero" type="int" visibility="private"/>
         <Field name="capacidad" type="int" visibility="private"/>
-        <Field name="reserva" type="Reserva" visibility="private"/>
         <Field name="pedidos" type="List&lt;Pedido&gt;" visibility="private"/>
       </Fields>
       <Constructors>
@@ -85,27 +89,23 @@
           <Argument type="List&lt;Pedido&gt;" name="pedidos"/>
         </Method>
         <Method name="getIdMesa" returnType="int" visibility="public"/>
-        <Method name="setIdMesa" returnType="int" visibility="public">
+        <Method name="setIdMesa" returnType="void" visibility="public">
           <Argument type="int" name="idMesa"/>
         </Method>
         <Method name="getEstado" returnType="boolean" visibility="public"/>
-        <Method name="setEstado" returnType="boolean" visibility="public">
+        <Method name="setEstado" returnType="void" visibility="public">
           <Argument type="boolean" name="estado"/>
         </Method>
         <Method name="getNumero" returnType="int" visibility="public"/>
-        <Method name="setNumero" returnType="int" visibility="public">
+        <Method name="setNumero" returnType="void" visibility="public">
           <Argument type="int" name="numero"/>
         </Method>
         <Method name="getCapacidad" returnType="int" visibility="public"/>
-        <Method name="setCapacidad" returnType="int" visibility="public">
+        <Method name="setCapacidad" returnType="void" visibility="public">
           <Argument type="int" name="capacidad"/>
         </Method>
-        <Method name="getReserva" returnType="Reserva" visibility="public"/>
-        <Method name="setReserva" returnType="Reserva" visibility="public">
-          <Argument type="Reserva" name="reserva"/>
-        </Method>
         <Method name="getPedidos" returnType="List&lt;Pedido&gt;" visibility="public"/>
-        <Method name="setPedidos" returnType="List&lt;Pedido&gt;" visibility="public">
+        <Method name="setPedidos" returnType="void" visibility="public">
           <Argument type="List&lt;Pedido&gt;" name="pedidos"/>
         </Method>
       </Methods>
@@ -118,6 +118,7 @@
         <Field name="mesa" type="Mesa" visibility="private"/>
         <Field name="mesero" type="Mesero" visibility="private"/>
         <Field name="productos" type="List&lt;Producto&gt;" visibility="private"/>
+        <Field name="hora" type="LocalTime" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -139,28 +140,32 @@
           <Argument type="List&lt;Producto&gt;" name="productos"/>
         </Method>
         <Method name="getIdPedido" returnType="int" visibility="public"/>
-        <Method name="setIdPedido" returnType="int" visibility="public">
+        <Method name="setIdPedido" returnType="void" visibility="public">
           <Argument type="int" name="idPedido"/>
         </Method>
         <Method name="getEstado" returnType="boolean" visibility="public"/>
-        <Method name="setEstado" returnType="boolean" visibility="public">
+        <Method name="setEstado" returnType="void" visibility="public">
           <Argument type="boolean" name="estado"/>
         </Method>
         <Method name="getFecha" returnType="LocalDate" visibility="public"/>
-        <Method name="setFecha" returnType="LocalDate" visibility="public">
+        <Method name="setFecha" returnType="void" visibility="public">
           <Argument type="LocalDate" name="fecha"/>
         </Method>
         <Method name="getMesa" returnType="Mesa" visibility="public"/>
-        <Method name="setMesa" returnType="Mesa" visibility="public">
+        <Method name="setMesa" returnType="void" visibility="public">
           <Argument type="Mesa" name="mesa"/>
         </Method>
         <Method name="getMesero" returnType="Mesero" visibility="public"/>
-        <Method name="setMesero" returnType="Mesero" visibility="public">
+        <Method name="setMesero" returnType="void" visibility="public">
           <Argument type="Mesero" name="mesero"/>
         </Method>
         <Method name="getProductos" returnType="List&lt;Productos&gt;" visibility="public"/>
-        <Method name="setProductos" returnType="List&lt;Productos&gt;" visibility="public">
+        <Method name="setProductos" returnType="void" visibility="public">
           <Argument type="List&lt;Productos&gt;" name="productos"/>
+        </Method>
+        <Method name="getHora" returnType="LocalTime" visibility="public"/>
+        <Method name="setHora" returnType="void" visibility="public">
+          <Argument type="LocalTime" name="hora"/>
         </Method>
       </Methods>
     </Class>
@@ -168,7 +173,7 @@
       <Fields>
         <Field name="idProducto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
-        <Field name="cantidad" type="int" visibility="private"/>
+        <Field name="stock" type="int" visibility="private"/>
         <Field name="precio" type="double" visibility="private"/>
         <Field name="codigo" type="int" visibility="private"/>
       </Fields>
@@ -190,23 +195,23 @@
           <Argument type="int" name="codigo"/>
         </Method>
         <Method name="getIdProducto" returnType="int" visibility="public"/>
-        <Method name="setIdProducto" returnType="int" visibility="public">
+        <Method name="setIdProducto" returnType="void" visibility="public">
           <Argument type="int" name="idProducto"/>
         </Method>
         <Method name="getNombre" returnType="String" visibility="public"/>
-        <Method name="setNombre" returnType="String" visibility="public">
+        <Method name="setNombre" returnType="void" visibility="public">
           <Argument type="String" name="nombre"/>
         </Method>
-        <Method name="getCantidad" returnType="int" visibility="public"/>
-        <Method name="setCantidad" returnType="int" visibility="public">
-          <Argument type="int" name="cantidad"/>
+        <Method name="getStock" returnType="int" visibility="public"/>
+        <Method name="setStock" returnType="void" visibility="public">
+          <Argument type="int" name="stock"/>
         </Method>
         <Method name="getPrecio" returnType="double" visibility="public"/>
-        <Method name="setPrecio" returnType="double" visibility="public">
+        <Method name="setPrecio" returnType="void" visibility="public">
           <Argument type="double" name="precio"/>
         </Method>
         <Method name="getCodigo" returnType="int" visibility="public"/>
-        <Method name="setCodigo" returnType="int" visibility="public">
+        <Method name="setCodigo" returnType="void" visibility="public">
           <Argument type="int" name="codigo"/>
         </Method>
       </Methods>
@@ -235,19 +240,19 @@
           <Argument type="List&lt;Pedido&gt;" name="pedidos"/>
         </Method>
         <Method name="getIdMesero" returnType="int" visibility="public"/>
-        <Method name="setIdMesero" returnType="int" visibility="public">
+        <Method name="setIdMesero" returnType="void" visibility="public">
           <Argument type="int" name="idMesero"/>
         </Method>
         <Method name="getNombre" returnType="String" visibility="public"/>
-        <Method name="setNombre" returnType="String" visibility="public">
+        <Method name="setNombre" returnType="void" visibility="public">
           <Argument type="String" name="nombre"/>
         </Method>
         <Method name="getDni" returnType="Int" visibility="public"/>
-        <Method name="setDni" returnType="int" visibility="public">
+        <Method name="setDni" returnType="void" visibility="public">
           <Argument type="int" name="dni"/>
         </Method>
         <Method name="getPedidos" returnType="List&lt;Pedido&gt;" visibility="public"/>
-        <Method name="setPedidos" returnType="List&lt;Pedido&gt;" visibility="public">
+        <Method name="setPedidos" returnType="void" visibility="public">
           <Argument type="List&lt;Pedido&gt;" name="pedidos"/>
         </Method>
         <Method name="getUser" returnType="User" visibility="public"/>
@@ -289,10 +294,10 @@
   <ClassDiagramRelations>
     <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesero" target="User" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Mesa" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
-    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
