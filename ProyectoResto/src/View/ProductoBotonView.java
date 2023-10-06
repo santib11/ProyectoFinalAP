@@ -13,14 +13,15 @@ import javax.swing.JOptionPane;
  *
  * @author EQUIPO 2020
  */
-public class ProductoVentanaView extends javax.swing.JFrame {
+public class ProductoBotonView extends javax.swing.JFrame {
      private Producto prodActual = null; //variable bandera
     /**
     /**
      * Creates new form ProductoVentanaView
      */
-    public ProductoVentanaView() {
+    public ProductoBotonView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -253,10 +254,11 @@ public class ProductoVentanaView extends javax.swing.JFrame {
         try{
             int cod = Integer.parseInt(jtCodigo.getText());
             ProductoController pc = new ProductoController();
-            Producto prod = pc.buscarProducto(cod);
-            jtNombre.setText(prod.getNombre());
-            jtPrecio.setText(prod.getPrecio()+"");
-            jtStock.setText(prod.getStock() +"");
+           prodActual = pc.buscarProducto(cod);
+            
+            jtNombre.setText(prodActual.getNombre());
+            jtPrecio.setText(prodActual.getPrecio()+"");
+            jtStock.setText(prodActual.getStock() +"");
             //jbEliminar.setVisible(prod.isEstado());
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "El codigo debe estar conformado por numeros", "Editar codigo", JOptionPane.WARNING_MESSAGE);
@@ -265,6 +267,7 @@ public class ProductoVentanaView extends javax.swing.JFrame {
                                         //ELIMINAR
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
+        
         if(prodActual!=null){
           
         ProductoController pc = new ProductoController();
