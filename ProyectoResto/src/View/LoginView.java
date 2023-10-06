@@ -2,8 +2,10 @@
 package View;
 
 import Controller.MeseroController;
+import Controller.ProductoController;
 import Controller.UserController;
 import Model.Mesero;
+import Model.Producto;
 import Model.User;
 import javax.swing.JOptionPane;
 
@@ -147,9 +149,16 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
     public static void main(String args[]) {
+        
+       
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             public void run() {
+                
                 new LoginView().setVisible(true);
+                
+                
             }
         });
     }

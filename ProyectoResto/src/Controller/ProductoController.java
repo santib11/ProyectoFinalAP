@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ProductoController {
@@ -61,6 +63,34 @@ public class ProductoController {
         return producto;
     }
     
+    //BUSCAR TODOS LOS PRODUCTOS
+     public List<Producto> listarProductos() {
+
+        List<Producto> productos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Producto ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto producto = new Producto();
+
+                producto = new Producto();
+              //  producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setCodigo(rs.getInt("codigo"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+                
+                productos.add(producto);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+        }
+        return productos;
+    }
+
     
     //MODIFICAR
     public void modificarProducto(Producto producto){
