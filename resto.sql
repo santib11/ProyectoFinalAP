@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2023 a las 15:26:41
+-- Tiempo de generación: 06-10-2023 a las 17:09:23
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -42,17 +42,10 @@ CREATE TABLE `mesa` (
 
 CREATE TABLE `mesero` (
   `idMesero` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `nombre` int(11) NOT NULL,
   `dni` int(11) NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `mesero`
---
-
-INSERT INTO `mesero` (`idMesero`, `nombre`, `dni`, `idUser`) VALUES
-(1, 'Luis Neyra', 39238551, 1);
 
 -- --------------------------------------------------------
 
@@ -63,23 +56,11 @@ INSERT INTO `mesero` (`idMesero`, `nombre`, `dni`, `idUser`) VALUES
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
   `idMesa` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
   `idMesero` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `cobrado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pedidoproducto`
---
-
-CREATE TABLE `pedidoproducto` (
-  `idPedidoProducto` int(11) NOT NULL,
-  `idPedido` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `importe` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -93,7 +74,7 @@ CREATE TABLE `producto` (
   `precio` double NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `codigo` int(11) NOT NULL,
-  `stock` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -125,13 +106,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `user`
---
-
-INSERT INTO `user` (`idUser`, `usuario`, `contraseña`) VALUES
-(1, 'luislp', '1234');
-
---
 -- Índices para tablas volcadas
 --
 
@@ -156,14 +130,7 @@ ALTER TABLE `mesero`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
   ADD KEY `idMesa` (`idMesa`),
-  ADD KEY `idMesero` (`idMesero`);
-
---
--- Indices de la tabla `pedidoproducto`
---
-ALTER TABLE `pedidoproducto`
-  ADD PRIMARY KEY (`idPedidoProducto`),
-  ADD KEY `idPedido` (`idPedido`),
+  ADD KEY `idMesero` (`idMesero`),
   ADD KEY `idProducto` (`idProducto`);
 
 --
@@ -201,19 +168,13 @@ ALTER TABLE `mesa`
 -- AUTO_INCREMENT de la tabla `mesero`
 --
 ALTER TABLE `mesero`
-  MODIFY `idMesero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idMesero` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `pedidoproducto`
---
-ALTER TABLE `pedidoproducto`
-  MODIFY `idPedidoProducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -231,7 +192,7 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -248,14 +209,8 @@ ALTER TABLE `mesero`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesa` (`idMesa`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idMesero`) REFERENCES `mesero` (`idMesero`);
-
---
--- Filtros para la tabla `pedidoproducto`
---
-ALTER TABLE `pedidoproducto`
-  ADD CONSTRAINT `pedidoproducto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
-  ADD CONSTRAINT `pedidoproducto_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idMesero`) REFERENCES `mesero` (`idMesero`),
+  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `reserva`

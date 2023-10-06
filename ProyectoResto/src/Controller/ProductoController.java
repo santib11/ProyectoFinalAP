@@ -27,8 +27,6 @@ public class ProductoController {
             ps.setString(3, producto.getNombre());
             ps.setInt(4, producto.getCodigo());
             ps.setInt(5, producto.getStock());
-           
-           
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
             ps.close();
@@ -74,6 +72,7 @@ public class ProductoController {
             ps.setInt(2, producto.getStock());
             ps.setString(3, producto.getNombre());
             ps.setDouble(4, producto.getPrecio());
+            ps.setInt(5, producto.getIdProducto());
             int resultado = ps.executeUpdate();
             if(resultado == 1){
                 JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
@@ -112,7 +111,7 @@ public class ProductoController {
             PreparedStatement ps = con.prepareStatement(sql);
           
             
-            ps.setInt(2, idProducto);
+            ps.setInt(1, idProducto);
             
             
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update

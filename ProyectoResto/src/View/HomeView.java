@@ -230,8 +230,8 @@ public class HomeView extends javax.swing.JFrame {
 
     private void showProductosOf(int idPedido){
         PedidoController pController = new PedidoController();
-//        List<Producto> productos = pController.buscarListaDeProductosDe(idPedido);
-//        for (Producto p : productos) {
+//        Pedido p = pController.buscarPedido(idPedido);
+//        for (Producto p : p.getProductos()) {
 //            String item = p.getNombre() + CANTIDAD;
 //            modelProductos.addElement(item);
 //        }
