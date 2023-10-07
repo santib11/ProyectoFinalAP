@@ -5,6 +5,7 @@ public class AdministrarView extends javax.swing.JFrame {
 
     public AdministrarView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")

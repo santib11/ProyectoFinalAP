@@ -28,7 +28,7 @@ public class ReservaView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableReservas = new javax.swing.JTable();
         jButtonCrearReserva = new javax.swing.JButton();
-        jButtonMarcarReserva = new javax.swing.JButton();
+        jButtonTomarReserva = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonBack = new javax.swing.JButton();
 
@@ -36,7 +36,7 @@ public class ReservaView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Reservas");
 
@@ -60,10 +60,10 @@ public class ReservaView extends javax.swing.JFrame {
             }
         });
 
-        jButtonMarcarReserva.setText("Tomar reserva");
-        jButtonMarcarReserva.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTomarReserva.setText("Tomar reserva");
+        jButtonTomarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMarcarReservaActionPerformed(evt);
+                jButtonTomarReservaActionPerformed(evt);
             }
         });
 
@@ -72,37 +72,35 @@ public class ReservaView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jButtonCrearReserva)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonTomarReserva)
+                .addGap(124, 124, 124))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(287, 287, 287)
+                        .addGap(304, 304, 304)
                         .addComponent(jLabel1)))
                 .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jButtonCrearReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonMarcarReserva)
-                .addGap(124, 124, 124))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 168, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonMarcarReserva)
-                            .addComponent(jButtonCrearReserva))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonTomarReserva)
+                    .addComponent(jButtonCrearReserva))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
@@ -118,10 +116,10 @@ public class ReservaView extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(jButtonBack)
-                .addContainerGap(674, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,12 +148,14 @@ public class ReservaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearReservaActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        CreateReservaView crv = new CreateReservaView();
+        crv.setVisible(true);
     }//GEN-LAST:event_jButtonCrearReservaActionPerformed
 
-    private void jButtonMarcarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcarReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonMarcarReservaActionPerformed
+    private void jButtonTomarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTomarReservaActionPerformed
+        // PREGUNTAR SI ESTA SEGURO Y LUEGO DEBE IR DIRECTO A CREAR PEDIDO CON ESTE MESERO
+    }//GEN-LAST:event_jButtonTomarReservaActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         this.setVisible(false);
@@ -167,7 +167,7 @@ public class ReservaView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonCrearReserva;
-    private javax.swing.JButton jButtonMarcarReserva;
+    private javax.swing.JButton jButtonTomarReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -179,7 +179,6 @@ public class ReservaView extends javax.swing.JFrame {
         modelReserva.addColumn("Nombre");
         modelReserva.addColumn("Dni");
         modelReserva.addColumn("Fecha");
-        modelReserva.addColumn("Hora");
         modelReserva.addColumn("Nro mesa");
         jTableReservas.setModel(modelReserva);
     }
@@ -191,7 +190,6 @@ public class ReservaView extends javax.swing.JFrame {
                 r.getNombre(),
                 r.getDni(),
                 r.getFecha(),
-                r.getHora(),
                 r.getMesa().getNumero()
             });
         }
