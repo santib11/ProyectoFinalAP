@@ -3,6 +3,7 @@ package Controller;
 
 import Model.Reserva;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,23 @@ public class ReservaController {
         con = Conexion.getConexion();
     }
     
+    public void altaReserva(Reserva reserva){
+        String sql = "INSERT INTO reserva (nombre, dni, fecha, estado, idMesa) VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, reserva.getNombre());
+            ps.setInt(2, reserva.getDni());
+            ps.setDate(3, Date.valueOf(reserva.getFecha()));
+            ps.setBoolean(4, reserva.isEstado());
+            ps.setInt(5, reserva.getMesa().getIdMesa());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Reserva creada correctamente");
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva");
+        }
+    }
+    
     public List<Reserva> getAllReserva() {
 
         List<Reserva> reservas = new ArrayList<>();
@@ -34,7 +52,6 @@ public class ReservaController {
                 reserva.setDni(rs.getInt("dni"));
                 reserva.setFecha(rs.getDate("fecha").toLocalDate());
                 reserva.setEstado(rs.getBoolean("estado"));
-                reserva.setHora(rs.getTime("hora").toLocalTime());
                 reserva.setMesa(mController.buscarMesa(rs.getInt("idMesa")));
                 reservas.add(reserva);
             }
