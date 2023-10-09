@@ -16,6 +16,7 @@ public class ReservaController {
     
     private static Connection con;
     private MesaController mController = new MesaController();
+    private PedidoController pController = new PedidoController();
     
     public ReservaController() {
 
@@ -66,7 +67,7 @@ public class ReservaController {
     public List<Mesa> getMesasDisponiblesDe(Date fecha) {
         List<Mesa> mesas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM reserva WHERE estado = 1 ";
+            String sql = "SELECT * FROM mesa m WHERE NOT EXISTS (SELECT 1 FROM reserva r WHERE r.idMesa = m.idMesa AND r.estado = 1 AND r.fecha = '2023-10-10')";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -75,6 +76,7 @@ public class ReservaController {
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setNumero(rs.getInt("numero"));
+                
                 mesas.add(mesa);
             }
             ps.close();
