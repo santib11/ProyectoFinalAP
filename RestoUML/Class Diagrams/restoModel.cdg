@@ -2,7 +2,7 @@
 
 <ClassDiagram name="resto">
   <ClassDiagramComponents>
-    <Class name="Reserva" package="" visibility="public" xPosition="27.0" yPosition="626.0">
+    <Class name="Reserva" package="" visibility="public" xPosition="27.0" yPosition="816.0">
       <Fields>
         <Field name="idReserva" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -61,7 +61,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Mesa" package="" visibility="public" xPosition="7.0" yPosition="53.0">
+    <Class name="Mesa" package="" visibility="public" xPosition="7.0" yPosition="136.0">
       <Fields>
         <Field name="idMesa" type="int" visibility="private"/>
         <Field name="estado" type="boolean" visibility="private"/>
@@ -110,7 +110,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Pedido" package="" visibility="public" xPosition="692.0" yPosition="53.0">
+    <Class name="Pedido" package="" visibility="public" xPosition="716.0" yPosition="53.0">
       <Fields>
         <Field name="idPedido" type="int" visibility="private"/>
         <Field name="estado" type="Boolean" visibility="private"/>
@@ -120,6 +120,7 @@
         <Field name="productos" type="List&lt;Producto&gt;" visibility="private"/>
         <Field name="hora" type="LocalTime" visibility="private"/>
         <Field name="importe" type="Double" visibility="private"/>
+        <Field name="cobrado" type="Boolean" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -168,13 +169,17 @@
         <Method name="setHora" returnType="void" visibility="public">
           <Argument type="LocalTime" name="hora"/>
         </Method>
-        <Method name="getImporte" returnType="void" visibility="public"/>
+        <Method name="getImporte" returnType="double" visibility="public"/>
         <Method name="setImporte" returnType="void" visibility="public">
           <Argument type="Double" name="importe"/>
         </Method>
+        <Method name="getCobrado" returnType="boolean" visibility="public"/>
+        <Method name="setCobrado" returnType="void" visibility="public">
+          <Argument type="boolean" name="cobrado"/>
+        </Method>
       </Methods>
     </Class>
-    <Class name="Producto" package="" visibility="public" xPosition="1472.0" yPosition="82.0">
+    <Class name="Producto" package="" visibility="public" xPosition="1635.0" yPosition="167.0">
       <Fields>
         <Field name="idProducto" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -221,7 +226,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Mesero" package="" visibility="public" xPosition="818.0" yPosition="683.0">
+    <Class name="Mesero" package="" visibility="public" xPosition="829.0" yPosition="873.0">
       <Fields>
         <Field name="idMesero" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -266,7 +271,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="User" package="" visibility="public" xPosition="1422.0" yPosition="749.0">
+    <Class name="User" package="" visibility="public" xPosition="1526.0" yPosition="939.0">
       <Fields>
         <Field name="idUser" type="int" visibility="private"/>
         <Field name="usuario" type="String" visibility="private"/>
@@ -298,11 +303,11 @@
   </ClassDiagramComponents>
   <ClassDiagramRelations>
     <HasRelation name="atiende1" source="Pedido" target="Mesero" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
     <HasRelation name="tiene" source="Mesero" target="User" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="tiene" source="Mesa" target="Reserva" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
-    <HasRelation name="corresponde1" source="Pedido" target="Mesa" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="contiene" source="Pedido" target="Producto" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="atiende2" source="Mesero" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="corresponde2" source="Mesa" target="Pedido" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
