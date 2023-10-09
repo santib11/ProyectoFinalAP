@@ -32,7 +32,7 @@ public class MeseroController {
         }
     }
     
-    public Mesero buscarMesero(int id) {
+    public Mesero buscarMesero(int id) {   //no seria x dni?
         Mesero mesero = null;
         String sql = "SELECT idMesero, nombre, dni FROM mesero WHERE idUser = ?";
         PreparedStatement ps = null;
@@ -46,6 +46,7 @@ public class MeseroController {
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setDni(rs.getInt("dni"));
             }
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + e.getMessage());
         }
@@ -63,9 +64,28 @@ public class MeseroController {
             if (rs.next()) {
                 ok = true;
             }
+            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + e.getMessage());
         }
         return ok;
+    }
+    
+    public void borrarMesero(Mesero mesero){
+        String sql = "DELETE FROM mesero WHERE dni = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mesero.getDni());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Mesero eliminada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
+        }
+        
     }
 }
