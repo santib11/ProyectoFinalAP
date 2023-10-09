@@ -10,27 +10,26 @@ public class Reserva {
     private int dni;
     private boolean estado;
     private LocalDate fecha;
-    private LocalTime hora;
     private Mesa mesa;
 
     public Reserva() {
     }
 
-    public Reserva(String nombre, int dni, boolean estado, LocalDate fecha, LocalTime hora) {
+    public Reserva(String nombre, int dni, boolean estado, LocalDate fecha, Mesa mesa) {
         this.nombre = nombre;
         this.dni = dni;
         this.estado = estado;
         this.fecha = fecha;
-        this.hora = hora;
+        this.mesa = mesa;
     }
 
-    public Reserva(int idReserva, String nombre, int dni, boolean estado, LocalDate fecha, LocalTime hora) {
+    public Reserva(int idReserva, String nombre, int dni, boolean estado, LocalDate fecha, Mesa mesa) {
         this.idReserva = idReserva;
         this.nombre = nombre;
         this.dni = dni;
         this.estado = estado;
         this.fecha = fecha;
-        this.hora = hora;
+        this.mesa = mesa;
     }
 
     public Mesa getMesa() {
@@ -79,14 +78,6 @@ public class Reserva {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
     }
     
 }

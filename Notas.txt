@@ -1,0 +1,7 @@
+Resto: 
+ - Tipo bar. 
+ - Nocturno de 18 a 24h.
+ - Dias habiles Jueves a Domingo.
+ - Reservas a tomar en el horario de 18h de las mesas disponibles(1h de espera).
+ - Como se reciben las reservas? Llamando/Wsp en el horario 18 a 20h a cargo de un
+   "telefonista" que pasa la informacion a un mesero para cargarlo al sistema.

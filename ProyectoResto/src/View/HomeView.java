@@ -38,7 +38,7 @@ public class HomeView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePedidos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonCreatePedido = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListProductos = new javax.swing.JList<>();
         jButtonCobrar = new javax.swing.JButton();
@@ -109,13 +109,23 @@ public class HomeView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTablePedidos);
 
-        jButton1.setText("Nuevo pedido");
+        jButtonCreatePedido.setText("Nuevo pedido");
+        jButtonCreatePedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreatePedidoActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(jListProductos);
 
         jButtonCobrar.setText("Cobrar Pedido");
 
         jButtonAdmPedido.setText("Administracion");
+        jButtonAdmPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdmPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,7 +133,7 @@ public class HomeView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(jButton1)
+                .addComponent(jButtonCreatePedido)
                 .addGap(106, 106, 106)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,7 +167,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonCreatePedido)
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,10 +222,22 @@ public class HomeView extends javax.swing.JFrame {
         showProductosOf(idPedido);
     }//GEN-LAST:event_jTablePedidosMouseClicked
 
+    private void jButtonAdmPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdmPedidoActionPerformed
+        this.setVisible(false);
+        AdministrarView av = new AdministrarView();
+        av.setVisible(true);
+    }//GEN-LAST:event_jButtonAdmPedidoActionPerformed
+
+    private void jButtonCreatePedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreatePedidoActionPerformed
+        this.setVisible(false);
+        CreatePedidoView cpv = new CreatePedidoView();
+        cpv.setVisible(true);
+    }//GEN-LAST:event_jButtonCreatePedidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdmPedido;
     private javax.swing.JButton jButtonCobrar;
+    private javax.swing.JButton jButtonCreatePedido;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonProducto;
     private javax.swing.JButton jButtonReserva;
@@ -232,7 +254,7 @@ public class HomeView extends javax.swing.JFrame {
     private void editModelPedidos() {
         modelPedidos.addColumn("Nro pedido");
         modelPedidos.addColumn("Nro mesa");
-        modelPedidos.addColumn("Cobrado");
+        modelPedidos.addColumn("Entregado"); //Pedido entregado o pedido cobrado
         modelPedidos.addColumn("Hora");
         jTablePedidos.setModel(modelPedidos);
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 17:09:23
+-- Tiempo de generación: 09-10-2023 a las 15:24:50
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.34
 
@@ -56,11 +56,25 @@ CREATE TABLE `mesero` (
 CREATE TABLE `pedido` (
   `idPedido` int(11) NOT NULL,
   `idMesa` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL,
   `idMesero` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `fecha` date NOT NULL,
-  `importe` double NOT NULL
+  `importe` double NOT NULL,
+  `cobrado` tinyint(1) NOT NULL,
+  `hora` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidoproducto`
+--
+
+CREATE TABLE `pedidoproducto` (
+  `idPedidoProducto` int(11) NOT NULL,
+  `idPedido` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -74,7 +88,7 @@ CREATE TABLE `producto` (
   `precio` double NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `codigo` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `stock` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -89,7 +103,6 @@ CREATE TABLE `reserva` (
   `dni` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `hora` time NOT NULL,
   `idMesa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -130,7 +143,14 @@ ALTER TABLE `mesero`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`idPedido`),
   ADD KEY `idMesa` (`idMesa`),
-  ADD KEY `idMesero` (`idMesero`),
+  ADD KEY `idMesero` (`idMesero`);
+
+--
+-- Indices de la tabla `pedidoproducto`
+--
+ALTER TABLE `pedidoproducto`
+  ADD PRIMARY KEY (`idPedidoProducto`),
+  ADD KEY `idPedido` (`idPedido`),
   ADD KEY `idProducto` (`idProducto`);
 
 --
@@ -177,6 +197,12 @@ ALTER TABLE `pedido`
   MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `pedidoproducto`
+--
+ALTER TABLE `pedidoproducto`
+  MODIFY `idPedidoProducto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -209,8 +235,14 @@ ALTER TABLE `mesero`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesa` (`idMesa`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idMesero`) REFERENCES `mesero` (`idMesero`),
-  ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
+  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idMesero`) REFERENCES `mesero` (`idMesero`);
+
+--
+-- Filtros para la tabla `pedidoproducto`
+--
+ALTER TABLE `pedidoproducto`
+  ADD CONSTRAINT `pedidoproducto_ibfk_1` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`idPedido`),
+  ADD CONSTRAINT `pedidoproducto_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`);
 
 --
 -- Filtros para la tabla `reserva`
