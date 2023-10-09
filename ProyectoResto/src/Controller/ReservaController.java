@@ -16,6 +16,7 @@ public class ReservaController {
     
     private static Connection con;
     private MesaController mController = new MesaController();
+    private PedidoController pController = new PedidoController();
     
     public ReservaController() {
 
@@ -75,6 +76,7 @@ public class ReservaController {
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setNumero(rs.getInt("numero"));
+                //mesa.setPedidos(pController.getAllPedidosOf(mesa.getIdMesa()));
                 mesas.add(mesa);
             }
             ps.close();
