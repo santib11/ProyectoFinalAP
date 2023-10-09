@@ -1,6 +1,7 @@
 
 package Controller;
 
+import Model.Mesa;
 import Model.Reserva;
 import java.sql.Connection;
 import java.sql.Date;
@@ -39,7 +40,6 @@ public class ReservaController {
     }
     
     public List<Reserva> getAllReserva() {
-
         List<Reserva> reservas = new ArrayList<>();
         try {
             String sql = "SELECT * FROM reserva WHERE estado = 1 ";
@@ -61,6 +61,27 @@ public class ReservaController {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Reserva " + ex.getMessage());
         }
         return reservas;
+    }
+    
+    public List<Mesa> getMesasDisponiblesDe(Date fecha) {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM reserva WHERE estado = 1 ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Mesa mesa = new Mesa();
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setEstado(rs.getBoolean("estado"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+                mesa.setNumero(rs.getInt("numero"));
+                mesas.add(mesa);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Reserva " + ex.getMessage());
+        }
+        return mesas;
     }
     
 }
