@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Model.Mesa;
@@ -8,22 +7,23 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ReservaController {
-    
+
     private static Connection con;
     private MesaController mController = new MesaController();
     private PedidoController pController = new PedidoController();
-    
+
     public ReservaController() {
 
         con = Conexion.getConexion();
     }
-    
-    public void altaReserva(Reserva reserva){
+
+    public void altaReserva(Reserva reserva) {
         String sql = "INSERT INTO reserva (nombre, dni, fecha, estado, idMesa) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class ReservaController {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva");
         }
     }
-    
+
     public List<Reserva> getAllReserva() {
         List<Reserva> reservas = new ArrayList<>();
         try {
@@ -53,7 +53,7 @@ public class ReservaController {
                 reserva.setDni(rs.getInt("dni"));
                 reserva.setFecha(rs.getDate("fecha").toLocalDate());
                 reserva.setEstado(rs.getBoolean("estado"));
-                reserva.setMesa(mController.buscarMesa(rs.getInt("idMesa")));
+                reserva.setMesa(mController.buscarMesaXId(rs.getInt("idMesa")));
                 reservas.add(reserva);
             }
             ps.close();
@@ -63,12 +63,13 @@ public class ReservaController {
         }
         return reservas;
     }
-    
-    public List<Mesa> getMesasDisponiblesDe(Date fecha) {
+
+    public List<Mesa> getMesasDisponiblesDe(LocalDate fecha) {
         List<Mesa> mesas = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM mesa m WHERE NOT EXISTS (SELECT 1 FROM reserva r WHERE r.idMesa = m.idMesa AND r.estado = 1 AND r.fecha = '2023-10-10')";
+            String sql = "SELECT * FROM mesa m WHERE NOT EXISTS (SELECT 1 FROM reserva r WHERE r.idMesa = m.idMesa AND r.estado = 1 AND r.fecha = ?)";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Mesa mesa = new Mesa();
@@ -76,7 +77,7 @@ public class ReservaController {
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
                 mesa.setNumero(rs.getInt("numero"));
-                
+                mesa.setPedidos(pController.pedidosxMesa(mesa.getIdMesa()));
                 mesas.add(mesa);
             }
             ps.close();
@@ -85,5 +86,19 @@ public class ReservaController {
         }
         return mesas;
     }
-    
+
+    public void bajaReserva(int idReserva) {
+        String sql = "UPDATE reserva SET estado = 0 WHERE idReserva = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idReserva);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Reserva cancelada correctamente");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva " + ex.getMessage());
+        }
+    }
 }

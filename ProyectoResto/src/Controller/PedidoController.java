@@ -202,5 +202,34 @@ public class PedidoController {
         return pedidos;
     }
     
-    
+    public List <Pedido> getAllPedidosOf(int idMesero, LocalDate fecha){
+        List<Pedido> pedidos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM pedido WHERE idMesero = ? AND fecha = ? AND estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMesero);
+            ps.setDate(2,Date.valueOf(fecha));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                Mesa mesa = mc.buscarMesaXId(rs.getInt("idMesa"));
+                Mesero mesero = meseroc.buscarMesero(rs.getInt("idMesero"));
+                pedido.setMesa(mesa);
+                pedido.setMesero(mesero);
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setFecha(rs.getDate("fecha").toLocalDate());
+                pedido.setImporte(rs.getDouble("importe"));
+                pedido.setCobrado(rs.getBoolean("cobrado"));
+                pedido.setHora(rs.getTime("hora").toLocalTime());
+                pedidos.add(pedido);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+        }
+        return pedidos;
+    }
 }

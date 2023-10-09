@@ -29,6 +29,7 @@ public class ReservaView extends javax.swing.JFrame {
         jTableReservas = new javax.swing.JTable();
         jButtonCrearReserva = new javax.swing.JButton();
         jButtonTomarReserva = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButtonBack = new javax.swing.JButton();
 
@@ -67,18 +68,26 @@ public class ReservaView extends javax.swing.JFrame {
             }
         });
 
+        jButtonDelete.setText("Quitar Reserva");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jButtonCrearReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonTomarReserva)
-                .addGap(124, 124, 124))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jButtonCrearReserva)
+                        .addGap(108, 108, 108)
+                        .addComponent(jButtonTomarReserva)
+                        .addGap(94, 94, 94)
+                        .addComponent(jButtonDelete))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,7 +108,8 @@ public class ReservaView extends javax.swing.JFrame {
                 .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonTomarReserva)
-                    .addComponent(jButtonCrearReserva))
+                    .addComponent(jButtonCrearReserva)
+                    .addComponent(jButtonDelete))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,10 +173,21 @@ public class ReservaView extends javax.swing.JFrame {
         hv.setVisible(true);
     }//GEN-LAST:event_jButtonBackActionPerformed
 
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        ReservaController rController = new ReservaController();
+        try {
+            int idReserva = (int)jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
+            rController.bajaReserva(idReserva);
+        } catch (Exception e) {
+            System.out.println("tabla sin seleccionar");
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonCrearReserva;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonTomarReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -176,6 +197,7 @@ public class ReservaView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void editModelReservas() {
+        modelReserva.addColumn("Nro Reserva");
         modelReserva.addColumn("Nombre");
         modelReserva.addColumn("Dni");
         modelReserva.addColumn("Fecha");
@@ -187,6 +209,7 @@ public class ReservaView extends javax.swing.JFrame {
         ReservaController rController = new ReservaController();
         for (Reserva r : rController.getAllReserva()) {
             modelReserva.addRow(new Object[]{
+                r.getIdReserva(),
                 r.getNombre(),
                 r.getDni(),
                 r.getFecha(),

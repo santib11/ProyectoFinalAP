@@ -67,5 +67,10 @@ public class Mesa {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+
+    @Override
+    public String toString() {
+        return "Mesa " + numero + "(capacidad: " + capacidad + " pers)";
+    }
     
 }
