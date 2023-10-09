@@ -19,11 +19,12 @@ public class MesaController {
     }
     
     public void agregarMesa(Mesa mesa){
-        String sql = "INSERT INTO mesa (numero, capacidad) VALUES (?,?)";
+        String sql = "INSERT INTO mesa (numero, capacidad, estado) VALUES (?,?,?)";
         try {  
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getCapacidad());
+            ps.setBoolean(3, mesa.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

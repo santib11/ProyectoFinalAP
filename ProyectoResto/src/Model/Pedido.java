@@ -14,25 +14,32 @@ public class Pedido {
     private Mesero mesero;
     private List<Producto> productos;
     private double importe;
+    private boolean cobrado;
 
     public Pedido() {
     }
 
-    public Pedido(boolean estado, LocalDate fecha, Mesa mesa, Mesero mesero, List<Producto> productos) {
+    public Pedido(boolean estado, LocalDate fecha, LocalTime hora, Mesa mesa, Mesero mesero, List<Producto> productos, double importe, boolean cobrado) {
         this.estado = estado;
         this.fecha = fecha;
+        this.hora = hora;
         this.mesa = mesa;
         this.mesero = mesero;
         this.productos = productos;
+        this.importe = importe;
+        this.cobrado = cobrado;
     }
 
-    public Pedido(int idPedido, boolean estado, LocalDate fecha, Mesa mesa, Mesero mesero, List<Producto> productos) {
+    public Pedido(int idPedido, boolean estado, LocalDate fecha, LocalTime hora, Mesa mesa, Mesero mesero, List<Producto> productos, double importe, boolean cobrado) {
         this.idPedido = idPedido;
         this.estado = estado;
         this.fecha = fecha;
+        this.hora = hora;
         this.mesa = mesa;
         this.mesero = mesero;
         this.productos = productos;
+        this.importe = importe;
+        this.cobrado = cobrado;
     }
 
     public int getIdPedido() {
@@ -98,6 +105,13 @@ public class Pedido {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
-    
+
+    public boolean isCobrado() {
+        return cobrado;
+    }
+
+    public void setCobrado(boolean cobrado) {
+        this.cobrado = cobrado;
+    }
     
 }
