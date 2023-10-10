@@ -31,7 +31,6 @@ public class CreateReservaView extends javax.swing.JFrame {
         jTextFieldName = new javax.swing.JTextField();
         jTextFieldDni = new javax.swing.JTextField();
         jButtonCreateReserva = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -65,7 +64,6 @@ public class CreateReservaView extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Crear Reserva");
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -102,9 +100,7 @@ public class CreateReservaView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(35, 35, 35)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148))
+                        .addGap(382, 382, 382))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,9 +131,7 @@ public class CreateReservaView extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2)
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -181,47 +175,46 @@ public class CreateReservaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jComboBoxMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMesasMouseClicked
-        jComboBoxMesas.removeAllItems();
-        try {
-            java.util.Date date = jDateChooser1.getDate();
-            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            ReservaController rController = new ReservaController();
-            List<Mesa> mesas = rController.getMesasDisponiblesDe(fecha);
-            for (Mesa m : mesas) {
-                jComboBoxMesas.addItem(m);
-            }
-        } catch (Exception e) {
-            System.out.println("");
-        }
+//        jComboBoxMesas.removeAllItems();
+//        try {
+//            java.util.Date date = jDateChooser1.getDate();
+//            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            ReservaController rController = new ReservaController();
+//            List<Mesa> mesas = rController.getMesasDisponiblesDe(fecha);
+//            for (Mesa m : mesas) {
+//                jComboBoxMesas.addItem(m);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("");
+//        }
     }//GEN-LAST:event_jComboBoxMesasMouseClicked
 
     private void jButtonCreateReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateReservaActionPerformed
-        try {
-            Mesa mesa = (Mesa)jComboBoxMesas.getSelectedItem();
-            java.util.Date date = jDateChooser1.getDate();
-            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            int dni = Integer.parseInt(jTextFieldDni.getText());
-            String nombre = jTextFieldName.getText();
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            Reserva reserva = new Reserva(nombre, dni, true, fecha, mesa);
-            ReservaController rController = new ReservaController();
-            rController.altaReserva(reserva);
-            clean();
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
-        }catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
-        }
+//        try {
+//            Mesa mesa = (Mesa)jComboBoxMesas.getSelectedItem();
+//            java.util.Date date = jDateChooser1.getDate();
+//            LocalDate fecha = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            int dni = Integer.parseInt(jTextFieldDni.getText());
+//            String nombre = jTextFieldName.getText();
+//            if (nombre.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
+//                return;
+//            }
+//            Reserva reserva = new Reserva(nombre, dni, true, fecha, mesa);
+//            ReservaController rController = new ReservaController();
+//            rController.altaReserva(reserva);
+//            clean();
+//        } catch (NullPointerException e) {
+//            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
+//        }catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
+//        }
     }//GEN-LAST:event_jButtonCreateReservaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonCreateReserva;
     private javax.swing.JComboBox<Mesa> jComboBoxMesas;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -236,7 +229,7 @@ public class CreateReservaView extends javax.swing.JFrame {
     private void clean(){
         jTextFieldName.setText("");
         jTextFieldDni.setText("");
-        jDateChooser1.setDate(null);
+//        jDateChooser1.setDate(null);
         jComboBoxMesas.removeAllItems();;
     }
 }

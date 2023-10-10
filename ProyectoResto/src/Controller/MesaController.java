@@ -7,7 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MesaController {
@@ -25,14 +30,16 @@ public class MesaController {
             ps.setInt(1, mesa.getNumero());
             ps.setInt(2, mesa.getCapacidad());
             ps.setBoolean(3, mesa.isEstado());
-            ps.executeUpdate();
+            int exito = ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 mesa.setIdMesa(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Mesa añadida con exito.");
+                JOptionPane.showMessageDialog(null, "Mesa añadida con exito");
             }
             ps.close();
-        } catch (SQLException ex) {
+        }catch (SQLIntegrityConstraintViolationException e) {
+            JOptionPane.showMessageDialog(null, "Ya existe una mesa con ese numero");
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa" + ex.getMessage());
         }       
     }
@@ -40,19 +47,18 @@ public class MesaController {
     public Mesa buscarMesa(int numero) {
         Mesa mesa = null;
         String sql = "SELECT * FROM mesa WHERE numero = ?";
-        PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, numero);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 mesa = new Mesa();
                 mesa.setIdMesa(rs.getInt("idMesa"));
-                mesa.setNumero(rs.getInt(numero));
+                mesa.setNumero(numero);
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe esa mesa?=????");
+                JOptionPane.showMessageDialog(null, "No existe esa mesa");
             }
             ps.close();
         } catch (SQLException e) {
@@ -76,7 +82,7 @@ public class MesaController {
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe esa mesa?=????");
+                JOptionPane.showMessageDialog(null, "No existe esa mesa");
             }
             ps.close();
         } catch (SQLException e) {
@@ -124,11 +130,11 @@ public class MesaController {
 //        }
 //    }
     
-    public void borrarMesa(Mesa mesa){
+    public void borrarMesa(int numero){
         String sql = "DELETE FROM mesa WHERE numero = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, mesa.getNumero());
+            ps.setInt(1, numero);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Mesa eliminada.");
@@ -139,6 +145,28 @@ public class MesaController {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa " + ex.getMessage());
         }
+    }
+    
+    public List <Mesa> listarMesas(){
+        String sql = "SELECT * FROM mesa";
+        ArrayList <Mesa> mesas = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Mesa mesa = new Mesa();
+                
+                mesa.setIdMesa(rs.getInt("idMesa"));
+                mesa.setNumero(rs.getInt("numero"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+                mesa.setEstado(rs.getBoolean("estado"));
+                mesas.add(mesa);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MesaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mesas;
         
     }
 }

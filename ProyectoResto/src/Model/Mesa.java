@@ -13,11 +13,10 @@ public class Mesa {
     public Mesa() {
     }
 
-    public Mesa(int numero, int capacidad, boolean estado, List<Pedido> pedidos) {
+    public Mesa(int numero, int capacidad, boolean estado) {
         this.numero = numero;
         this.capacidad = capacidad;
         this.estado = estado;
-        this.pedidos = pedidos;
     }
 
     public Mesa(int idMesa, int numero, int capacidad, boolean estado, List<Pedido> pedidos) {

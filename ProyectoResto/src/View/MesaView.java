@@ -1,11 +1,22 @@
 
 package View;
 
+import Controller.MesaController;
+import Model.Mesa;
+import javax.swing.table.DefaultTableModel;
+
 public class MesaView extends javax.swing.JFrame {
+    private DefaultTableModel modelMesa = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
 
     public MesaView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        editModelMesas();
+        loadTableMesas();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -15,10 +26,9 @@ public class MesaView extends javax.swing.JFrame {
         jButtonBack = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableReservas = new javax.swing.JTable();
+        jTableMesas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbAdministrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -51,7 +61,7 @@ public class MesaView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
 
-        jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,45 +72,44 @@ public class MesaView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableReservas);
+        jScrollPane1.setViewportView(jTableMesas);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Mesas");
 
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
+        jbAdministrar.setText("Administrar mesas");
+        jbAdministrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAdministrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(325, 325, 325))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(135, 135, 135))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(325, 325, 325))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jbAdministrar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(297, 297, 297))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jbAdministrar)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -129,15 +138,47 @@ public class MesaView extends javax.swing.JFrame {
         hv.setVisible(true);
     }//GEN-LAST:event_jButtonBackActionPerformed
 
+    private void jbAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAdministrarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        CreateMesaView mv = new CreateMesaView();
+        mv.setVisible(true);
+    }//GEN-LAST:event_jbAdministrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableReservas;
+    private javax.swing.JTable jTableMesas;
+    private javax.swing.JButton jbAdministrar;
     // End of variables declaration//GEN-END:variables
+    private void editModelMesas() {
+        modelMesa.addColumn("Numero");
+        modelMesa.addColumn("Capacidad");
+        modelMesa.addColumn("Estado");
+        jTableMesas.setModel(modelMesa);
+    }
+    
+    private void loadTableMesas() {
+        MesaController mController = new MesaController();
+        String estado = "Libre";
+        for (Mesa m : mController.listarMesas()) {
+            if (!m.isEstado()) {
+                estado = "Ocupado";
+                }
+            if (m.isEstado()) {
+                estado = "Libre";
+            }
+            modelMesa.addRow(new Object[]{
+                m.getNumero(),
+                m.getCapacidad(),
+                estado
+            });
+        }
+    }
 }
+
+
