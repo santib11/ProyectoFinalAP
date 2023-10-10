@@ -7,6 +7,7 @@ package View;
 
 import Controller.MesaController;
 import Model.Mesa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,15 +40,14 @@ public class CreateMesaView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtNumero = new javax.swing.JTextField();
         jtCapacidad = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jbAgregar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
         jbBorrar = new javax.swing.JButton();
-        jrEstado = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(763, 557));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -86,9 +86,6 @@ public class CreateMesaView extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("Capacidad:");
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel4.setText("Estado:");
-
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,17 +122,11 @@ public class CreateMesaView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(209, 209, 209)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrEstado))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jbAgregar)
-                                .addGap(27, 27, 27)
-                                .addComponent(jbModificar)
-                                .addGap(30, 30, 30)
-                                .addComponent(jbBorrar))))
+                        .addComponent(jbAgregar)
+                        .addGap(27, 27, 27)
+                        .addComponent(jbModificar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jbBorrar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -153,30 +144,23 @@ public class CreateMesaView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(233, 233, 233)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbBuscar))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jrEstado)))
-                .addGap(75, 75, 75)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscar))
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(150, 150, 150)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar)
                     .addComponent(jbModificar)
@@ -211,96 +195,74 @@ public class CreateMesaView extends javax.swing.JFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        int numero = Integer.parseInt(jtNumero.getText());
-        Mesa mesa = new Mesa();
-        mesa = mc.buscarMesa(numero);
-        jtCapacidad.setText(mesa.getCapacidad()+"");
-        jrEstado.setSelected(mesa.isEstado());
-        
+        try{
+            int numero = Integer.parseInt(jtNumero.getText());
+            Mesa mesa = mc.buscarMesa(numero);
+            jtCapacidad.setText(mesa.getCapacidad()+"");
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "El numero debe estar conformado por numeros", "Editar numero", JOptionPane.WARNING_MESSAGE);
+        }   catch (NullPointerException ex) {
+            System.out.println("No existe mesa con ese numero");
+        } 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
-        
-        int numero = Integer.parseInt(jtNumero.getText());
-        int cap = Integer.parseInt(jtCapacidad.getText());
-        boolean estado = jrEstado.isSelected();
-        Mesa mesa = new Mesa(numero, cap, estado);
-        mc.agregarMesa(mesa);
-        borrarCampos();
+        try{
+            int numero = Integer.parseInt(jtNumero.getText());
+            int cap = Integer.parseInt(jtCapacidad.getText());
+            Mesa mesa = new Mesa(numero, cap, true);
+            mc.agregarMesa(mesa);
+            borrarCampos();
+        }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this,"Debe ingresar los formatos correctos","Error de datos", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
-        int numero = Integer.parseInt(jtNumero.getText());
-        mc.borrarMesa(numero);
-        borrarCampos();
+        try{
+            int numero = Integer.parseInt(jtNumero.getText());
+            mc.borrarMesa(numero);
+            borrarCampos();
+        }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this,"Debe ingresar los formatos correctos","Error de datos", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         // TODO add your handling code here:
-        int numero = Integer.parseInt(jtNumero.getText());
-        int cap = Integer.parseInt(jtCapacidad.getText());
-        boolean estado = jrEstado.isSelected();
-        Mesa mesa = new Mesa(numero, cap, estado);
-        mc.modificarMesa(mesa);
-        borrarCampos();
+        try{
+            int numero = Integer.parseInt(jtNumero.getText());
+            int cap = Integer.parseInt(jtCapacidad.getText());
+            Mesa mesa = new Mesa(numero, cap, true);
+            mc.modificarMesa(mesa);
+            borrarCampos();
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this,"Debe ingresar los formatos correctos","Error de datos", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbModificarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateMesaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateMesaView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTextField jtCapacidad;
     private javax.swing.JTextField jtNumero;
     // End of variables declaration//GEN-END:variables
     private void borrarCampos(){
     jtNumero.setText("");
     jtCapacidad.setText("");
-    jrEstado.setSelected(false);
 }
 }
