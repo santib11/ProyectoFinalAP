@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.PedidoController;
@@ -7,6 +6,7 @@ import Model.Producto;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class HomeView extends javax.swing.JFrame {
@@ -18,7 +18,7 @@ public class HomeView extends javax.swing.JFrame {
             return false;
         }
     };
-    
+
     public HomeView() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -48,6 +48,7 @@ public class HomeView extends javax.swing.JFrame {
         jButtonCobrar = new javax.swing.JButton();
         jButtonAdmPedido = new javax.swing.JButton();
         jButtonMesa = new javax.swing.JButton();
+        jButtonEntrega = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -154,37 +155,47 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        jButtonEntrega.setText("Entregar Pedido");
+        jButtonEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEntregaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButtonCreatePedido)
-                .addGap(106, 106, 106)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jButtonCreatePedido)
                         .addGap(106, 106, 106)
-                        .addComponent(jButtonReserva)
-                        .addGap(78, 78, 78)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonAdmPedido)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButtonMesa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonProducto)
-                                .addGap(90, 90, 90)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addComponent(jButtonReserva)
+                            .addGap(78, 78, 78)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButtonAdmPedido)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jButtonMesa)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonProducto)
+                                    .addGap(90, 90, 90))))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,17 +207,18 @@ public class HomeView extends javax.swing.JFrame {
                     .addComponent(jButtonMesa))
                 .addGap(38, 38, 38)
                 .addComponent(jButtonAdmPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonCreatePedido)
                         .addGap(31, 31, 31))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jButtonEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -244,13 +256,16 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProductoActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
-        this.setVisible(false);
-        LoginView lv = new LoginView();
-        lv.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (confirm == JOptionPane.YES_NO_OPTION) {
+            this.setVisible(false);
+            LoginView lv = new LoginView();
+            lv.setVisible(true);
+        }
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     private void jTablePedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePedidosMouseClicked
-        int idPedido = (int)jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
+        int idPedido = (int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
         showProductosOf(idPedido);
     }//GEN-LAST:event_jTablePedidosMouseClicked
 
@@ -273,14 +288,36 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMesaActionPerformed
 
     private void jButtonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCobrarActionPerformed
-        int idPedido = (int)jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
-        //pController.cobrarPedido(idPedido);
+        try {
+            int idPedido = (int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro de marcar el pedido como cobrado?", "Cobrar", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                //pController.cobrarPedido(idPedido);
+                JOptionPane.showMessageDialog(null, "Pedido cobrado!! ");
+            }
+        } catch (Exception e) {
+            System.out.println("Seleccione un elemento de la tabla");
+        }
     }//GEN-LAST:event_jButtonCobrarActionPerformed
+
+    private void jButtonEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntregaActionPerformed
+        try {
+            int idPedido = (int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro de marcar el pedido como entregado?", "Entregar", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                //pController.entregarPedido(idPedido);
+                JOptionPane.showMessageDialog(null, "Pedido Entregado!! ");
+            }
+        } catch (Exception e) {
+            System.out.println("Seleccione un elemento de la tabla");
+        }
+    }//GEN-LAST:event_jButtonEntregaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdmPedido;
     private javax.swing.JButton jButtonCobrar;
     private javax.swing.JButton jButtonCreatePedido;
+    private javax.swing.JButton jButtonEntrega;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonMesa;
     private javax.swing.JButton jButtonProducto;
@@ -299,27 +336,33 @@ public class HomeView extends javax.swing.JFrame {
     private void editModelPedidos() {
         modelPedidos.addColumn("Nro pedido");
         modelPedidos.addColumn("Nro mesa");
-        modelPedidos.addColumn("Entrega");
+        modelPedidos.addColumn("Cobrado");
+        modelPedidos.addColumn("Entregado");
         modelPedidos.addColumn("Hora");
         jTablePedidos.setModel(modelPedidos);
     }
 
     private void loadTablePedidos() {
-        String cobrado = "";
+        String cobrado = "No cobrado";
+        String estado = "No";
         for (Pedido p : pController.getAllPedidosOf(LoginView.mesero.getIdMesero(), LocalDate.now())) {
+            if (!p.isCobrado()) {
+                cobrado = "Cobrado";
+            }
             if (p.isEstado()) {
-                cobrado = "No cobrado";
+                estado = "Si";
             }
             modelPedidos.addRow(new Object[]{
                 p.getIdPedido(),
                 p.getMesa().getNumero(),
                 cobrado,
+                estado,
                 p.getHora()
             });
         }
     }
 
-    private void showProductosOf(int idPedido){
+    private void showProductosOf(int idPedido) {
 //        Pedido p = pController.buscarPedido(idPedido);
 //        for (Producto p : p.getProductos()) {
 //            String item = p.getNombre() + CANTIDAD;

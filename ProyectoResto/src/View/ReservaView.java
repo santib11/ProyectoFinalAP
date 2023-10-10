@@ -2,10 +2,12 @@ package View;
 
 import Controller.ReservaController;
 import Model.Reserva;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ReservaView extends javax.swing.JFrame {
 
+    private ReservaController rController = new ReservaController();
     private DefaultTableModel modelReserva = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
@@ -83,11 +85,11 @@ public class ReservaView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
+                        .addGap(92, 92, 92)
                         .addComponent(jButtonCrearReserva)
-                        .addGap(108, 108, 108)
+                        .addGap(117, 117, 117)
                         .addComponent(jButtonTomarReserva)
-                        .addGap(94, 94, 94)
+                        .addGap(106, 106, 106)
                         .addComponent(jButtonDelete))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -165,7 +167,18 @@ public class ReservaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCrearReservaActionPerformed
 
     private void jButtonTomarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTomarReservaActionPerformed
-        // PREGUNTAR SI ESTA SEGURO Y LUEGO DEBE IR DIRECTO A CREAR PEDIDO CON ESTE MESERO
+        try {
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere tomar esta reserva?", "Tomar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                int idReserva = (int) jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
+                //rController.bajaReserva(idReserva);
+                this.setVisible(false);
+                CreatePedidoView cpv = new CreatePedidoView();
+                cpv.setVisible(true);
+            }
+        } catch (Exception e) {
+            System.out.println("Seleccione un elemento de la tabla");
+        }
     }//GEN-LAST:event_jButtonTomarReservaActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -175,12 +188,14 @@ public class ReservaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        ReservaController rController = new ReservaController();
         try {
-            int idReserva = (int)jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
-            rController.bajaReserva(idReserva);
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere quitar esta reserva?", "Quitar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                int idReserva = (int) jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
+                rController.bajaReserva(idReserva);
+            }
         } catch (Exception e) {
-            System.out.println("tabla sin seleccionar");
+            System.out.println("Seleccione un elemento de la tabla");
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
@@ -207,7 +222,6 @@ public class ReservaView extends javax.swing.JFrame {
     }
 
     private void loadTableReservas() {
-        ReservaController rController = new ReservaController();
         for (Reserva r : rController.getAllReserva()) {
             modelReserva.addRow(new Object[]{
                 r.getIdReserva(),
