@@ -228,8 +228,28 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
+    }
+    
+    public List <String> getAllProductosXCantOfPedido(int id){
+        List<String> productosXcant = new ArrayList<>();
+        try {
+            String sql = "SELECT pp.cantidad, pr.nombre FROM pedido p JOIN pedidoproducto pp ON p.idPedido = pp.idPedido JOIN producto pr ON pp.idProducto = pr.idProducto WHERE p.idPedido = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("nombre");
+                int cant = rs.getInt("cantidad");
+                String item = name + " (cant: " + cant +")";
+                productosXcant.add(item);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
+        }
+        return productosXcant;
     }
 }
