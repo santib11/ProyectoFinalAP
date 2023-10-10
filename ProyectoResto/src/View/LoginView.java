@@ -30,11 +30,11 @@ public class LoginView extends javax.swing.JFrame {
         jPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("INICIAR SESION");
 
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
@@ -49,7 +49,6 @@ public class LoginView extends javax.swing.JFrame {
 
         jButtonLogin.setBackground(new java.awt.Color(204, 204, 204));
         jButtonLogin.setFont(new java.awt.Font("Lucida Sans", 1, 12)); // NOI18N
-        jButtonLogin.setForeground(new java.awt.Color(0, 0, 0));
         jButtonLogin.setText("Ingresar");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +57,6 @@ public class LoginView extends javax.swing.JFrame {
         });
 
         jButtonRegister.setBackground(new java.awt.Color(204, 204, 204));
-        jButtonRegister.setForeground(new java.awt.Color(0, 0, 0));
         jButtonRegister.setText("Registrarse");
         jButtonRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +116,7 @@ public class LoginView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
