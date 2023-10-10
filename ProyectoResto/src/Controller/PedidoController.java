@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PedidoController {
@@ -50,6 +52,28 @@ public class PedidoController {
         }
     }
     
+    public void entregarPedido (int idPedido){
+        String sql = "UPDATE pedido SET estado = 0 WHERE idPedido = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPedido);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido " + ex.getMessage());
+        }
+    }
+    
+    public void cobrarPedido(int idPedido){
+        String sql = "UPDATE pedido SET cobrado = 0 WHERE idPedido = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idPedido);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido " + ex.getMessage());
+        }
+    }
+    
     public List <Pedido> pedidosxFechaxHora(LocalDate fecha, LocalTime hora){
         List<Pedido> pedidos = new ArrayList<>();
         try {
@@ -76,7 +100,7 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
     }
@@ -106,7 +130,7 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
     }
@@ -136,7 +160,7 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
     }
@@ -166,7 +190,7 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
     }
@@ -197,7 +221,7 @@ public class PedidoController {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
         }
         return pedidos;
     }

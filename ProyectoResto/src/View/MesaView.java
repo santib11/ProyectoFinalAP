@@ -168,9 +168,6 @@ public class MesaView extends javax.swing.JFrame {
         for (Mesa m : mController.listarMesas()) {
             if (!m.isEstado()) {
                 estado = "Ocupado";
-                }
-            if (m.isEstado()) {
-                estado = "Libre";
             }
             modelMesa.addRow(new Object[]{
                 m.getNumero(),
