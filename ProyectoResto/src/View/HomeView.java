@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class HomeView extends javax.swing.JFrame {
 
+    private PedidoController pController = new PedidoController();
     private DefaultListModel modelProductos = new DefaultListModel();
     private DefaultTableModel modelPedidos = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
@@ -24,6 +25,7 @@ public class HomeView extends javax.swing.JFrame {
         jListProductos.setModel(modelProductos);
         editModelPedidos();
         loadTablePedidos();
+        jLabelName.setText("Mesero: " + LoginView.mesero.getNombre());
     }
 
     @SuppressWarnings("unchecked")
@@ -33,6 +35,7 @@ public class HomeView extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jButtonExit = new javax.swing.JButton();
+        jLabelName = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonReserva = new javax.swing.JButton();
         jButtonProducto = new javax.swing.JButton();
@@ -47,6 +50,7 @@ public class HomeView extends javax.swing.JFrame {
         jButtonMesa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -57,6 +61,11 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        jLabelName.setBackground(new java.awt.Color(204, 204, 204));
+        jLabelName.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabelName.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelName.setText("Mesero:  ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -64,13 +73,17 @@ public class HomeView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jButtonExit)
-                .addContainerGap(687, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelName)
+                .addGap(107, 107, 107))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButtonExit)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonExit)
+                    .addComponent(jLabelName))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -121,6 +134,11 @@ public class HomeView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jListProductos);
 
         jButtonCobrar.setText("Cobrar Pedido");
+        jButtonCobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCobrarActionPerformed(evt);
+            }
+        });
 
         jButtonAdmPedido.setText("Administracion");
         jButtonAdmPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +184,7 @@ public class HomeView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonProducto)
                                 .addGap(90, 90, 90)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,8 +217,8 @@ public class HomeView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,6 +272,11 @@ public class HomeView extends javax.swing.JFrame {
         mv.setVisible(true);
     }//GEN-LAST:event_jButtonMesaActionPerformed
 
+    private void jButtonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCobrarActionPerformed
+        int idPedido = (int)jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
+        //pController.cobrarPedido(idPedido);
+    }//GEN-LAST:event_jButtonCobrarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdmPedido;
     private javax.swing.JButton jButtonCobrar;
@@ -263,6 +286,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonProducto;
     private javax.swing.JButton jButtonReserva;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelName;
     private javax.swing.JList<String> jListProductos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -281,7 +305,6 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     private void loadTablePedidos() {
-        PedidoController pController = new PedidoController();
         String cobrado = "";
         for (Pedido p : pController.getAllPedidosOf(LoginView.mesero.getIdMesero(), LocalDate.now())) {
             if (p.isEstado()) {
@@ -297,7 +320,6 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     private void showProductosOf(int idPedido){
-        PedidoController pController = new PedidoController();
 //        Pedido p = pController.buscarPedido(idPedido);
 //        for (Producto p : p.getProductos()) {
 //            String item = p.getNombre() + CANTIDAD;
