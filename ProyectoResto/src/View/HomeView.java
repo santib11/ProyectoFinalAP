@@ -292,7 +292,7 @@ public class HomeView extends javax.swing.JFrame {
             int idPedido = (int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
             int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro de marcar el pedido como cobrado?", "Cobrar", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (confirm == JOptionPane.YES_NO_OPTION) {
-                //pController.cobrarPedido(idPedido);
+                pController.cobrarPedido(idPedido);
                 JOptionPane.showMessageDialog(null, "Pedido cobrado!! ");
             }
         } catch (Exception e) {
@@ -305,7 +305,7 @@ public class HomeView extends javax.swing.JFrame {
             int idPedido = (int) jTablePedidos.getValueAt(jTablePedidos.getSelectedRow(), 0);
             int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro de marcar el pedido como entregado?", "Entregar", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (confirm == JOptionPane.YES_NO_OPTION) {
-                //pController.entregarPedido(idPedido);
+                pController.entregarPedido(idPedido);
                 JOptionPane.showMessageDialog(null, "Pedido Entregado!! ");
             }
         } catch (Exception e) {
