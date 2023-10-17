@@ -3,10 +3,13 @@ package View;
 
 import Controller.ProductoController;
 import Model.Producto;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductoView extends javax.swing.JFrame {
 
+    private ProductoController pController = new ProductoController();
+    
     private DefaultTableModel modelProducto = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
@@ -146,14 +149,22 @@ public class ProductoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrerProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrerProductoActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
-        ProductoBotonView pvv = new ProductoBotonView();
+        CreateProductoView pvv = new CreateProductoView();
         pvv.setVisible(true); 
     }//GEN-LAST:event_jButtonCrerProductoActionPerformed
 
     private void jButtonQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProductoActionPerformed
-        // TODO add your handling code here:
+        try {
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere eliminar el producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                int idProducto = (int) jTableProductos.getValueAt(jTableProductos.getSelectedRow(), 0);
+                pController.bajaProducto(idProducto);
+                JOptionPane.showMessageDialog(null, "Producto eliminado!! ");
+            }
+        } catch (Exception e) {
+            System.out.println("Seleccione un elemento de la tabla");
+        }
     }//GEN-LAST:event_jButtonQuitarProductoActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -184,10 +195,9 @@ public class ProductoView extends javax.swing.JFrame {
     }
 
     private void loadTableProductos() {
-        ProductoController pController = new ProductoController();
         for (Producto p : pController.listarProductos()) {
             modelProducto.addRow(new Object[]{
-                p.getCodigo(),
+                p.getIdProducto(),
                 p.getNombre(),
                 p.getStock(),
                 p.getPrecio(),
@@ -195,12 +205,5 @@ public class ProductoView extends javax.swing.JFrame {
            });
         }
     }
-    
-    
-    private void eliminarProducto(int id){
-        ProductoController pc = new ProductoController();
-        pc.eliminarProductoFisicamente(id);
-    }
-    
     
 }

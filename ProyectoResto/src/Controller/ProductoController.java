@@ -75,7 +75,7 @@ public class ProductoController {
                 Producto producto = new Producto();
 
                 producto = new Producto();
-              //  producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setCodigo(rs.getInt("codigo"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setStock(rs.getInt("stock"));
@@ -97,7 +97,6 @@ public class ProductoController {
         String sql = "UPDATE producto SET codigo = ?, stock = ?, nombre = ?, precio = ? WHERE idProducto = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-           
             ps.setInt(1, producto.getCodigo());
             ps.setInt(2, producto.getStock());
             ps.setString(3, producto.getNombre());
@@ -134,28 +133,20 @@ public class ProductoController {
     
     
     // ELIMINACION FISICA
-    public void eliminarProductoFisicamente(int idProducto){
+    public void bajaProducto(int idProducto){
        String sql = "DELETE FROM producto WHERE idProducto = ?";
-       
        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-          
-            
+            PreparedStatement ps = con.prepareStatement(sql);      
             ps.setInt(1, idProducto);
-            
-            
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update
             
             if(filas>0){
                JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente");
             }
-             ps.close();
-             
+             ps.close(); 
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Productos ");
-
-        }
-       
+        }       
     }
     
 }
