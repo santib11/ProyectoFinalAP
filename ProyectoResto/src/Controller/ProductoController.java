@@ -133,11 +133,11 @@ public class ProductoController {
     
     
     // ELIMINACION FISICA
-    public void bajaProducto(int idProducto){
-       String sql = "DELETE FROM producto WHERE idProducto = ?";
+    public void bajaProducto(int codigo){
+       String sql = "DELETE FROM producto WHERE codigo = ?";
        try {
             PreparedStatement ps = con.prepareStatement(sql);      
-            ps.setInt(1, idProducto);
+            ps.setInt(1, codigo);
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update
             
             if(filas>0){
