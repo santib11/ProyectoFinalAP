@@ -155,7 +155,7 @@ public class MesaController {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Mesa mesa = new Mesa();
-                
+             
                 mesa.setIdMesa(rs.getInt("idMesa"));
                 mesa.setNumero(rs.getInt("numero"));
                 mesa.setCapacidad(rs.getInt("capacidad"));
@@ -164,7 +164,7 @@ public class MesaController {
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(MesaController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa " + ex.getMessage());
         }
         return mesas;
         

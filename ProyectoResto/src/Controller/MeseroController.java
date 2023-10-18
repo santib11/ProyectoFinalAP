@@ -2,15 +2,19 @@
 package Controller;
 
 import Model.Mesero;
+import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class MeseroController {
     private static Connection con;
+    UserController uc = new UserController();
     
     public MeseroController() {
 
@@ -86,6 +90,28 @@ public class MeseroController {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
         }
-        
+    }
+    
+    public List <Mesero> listarMeseros(){
+        String sql = "SELECT * FROM mesero";
+        ArrayList <Mesero> meseros = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Mesero mesero = new Mesero();
+                
+                mesero.setIdMesero(rs.getInt("idMesero"));
+                mesero.setNombre(rs.getString("nombre"));
+                mesero.setDni(rs.getInt("dni"));
+                User usuario = uc.buscarUserxId(rs.getInt("idUser"));
+                mesero.setUser(usuario);
+                meseros.add(mesero);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
+        }
+        return meseros;
     }
 }
