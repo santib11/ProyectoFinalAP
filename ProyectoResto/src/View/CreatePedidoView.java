@@ -3,10 +3,15 @@ package View;
 
 import Controller.MesaController;
 import Controller.MeseroController;
+import Controller.PedidoController;
 import Controller.ProductoController;
 import Model.Mesa;
 import Model.Mesero;
+import Model.Pedido;
 import Model.Producto;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,16 +21,18 @@ public class CreatePedidoView extends javax.swing.JFrame {
             return false;
         }
     };
-    
+    private static double suma = 0;
     private static MesaController mesac = new MesaController();
     private static MeseroController mc = new MeseroController();
     private static ProductoController pc = new ProductoController();
+    private static PedidoController pedidoc = new PedidoController();
     
     public CreatePedidoView() {
         initComponents();
         this.setLocationRelativeTo(null);
         armarCabecera();
         armarCombosBoxs();
+        borrarFilas();
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +53,9 @@ public class CreatePedidoView extends javax.swing.JFrame {
         jtImporte = new javax.swing.JTextField();
         jbNuevo = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
+        jbQuitar = new javax.swing.JButton();
+        jcStock = new javax.swing.JComboBox<>();
+        jbAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,6 +97,12 @@ public class CreatePedidoView extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setText("Producto:");
 
+        jcProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcProductoActionPerformed(evt);
+            }
+        });
+
         jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -106,8 +122,32 @@ public class CreatePedidoView extends javax.swing.JFrame {
         jtImporte.setEditable(false);
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
+        jbQuitar.setText("Quitar");
+        jbQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbQuitarActionPerformed(evt);
+            }
+        });
+
+        jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,7 +158,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(329, 329, 329))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(257, 257, 257)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,21 +167,27 @@ public class CreatePedidoView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcMesa, 0, 175, Short.MAX_VALUE)
-                            .addComponent(jcProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(337, 337, 337)
-                            .addComponent(jbNuevo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbCancelar))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jtImporte))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jcProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jcStock, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAgregar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(337, 337, 337)
+                        .addComponent(jbNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbCancelar))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtImporte))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbQuitar)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,10 +202,14 @@ public class CreatePedidoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAgregar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
+                .addComponent(jbQuitar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -167,7 +217,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbCancelar))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,6 +244,81 @@ public class CreatePedidoView extends javax.swing.JFrame {
         Hv.setVisible(true);
     }//GEN-LAST:event_jButtonBackActionPerformed
 
+    private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
+        // TODO add your handling code here:
+        jcStock.removeAllItems();
+        Producto prod = new Producto();
+        prod = (Producto)jcProducto.getSelectedItem();
+        for(int i = 1;i <= prod.getStock();i++){
+            jcStock.addItem(i);
+        }
+    }//GEN-LAST:event_jcProductoActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        // TODO add your handling code here:
+        borrarFilas();
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jbQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbQuitarActionPerformed
+        // TODO add your handling code here:
+        int filaselec = jtTabla.getSelectedRow();
+        if (filaselec !=-1){
+            suma -= ((Double)jtTabla.getValueAt(jtTabla.getSelectedRow(), 2) * (Integer)jtTabla.getValueAt(jtTabla.getSelectedRow(), 3));
+            jtImporte.setText(suma+"");
+            modelo.removeRow(filaselec);
+        }
+    }//GEN-LAST:event_jbQuitarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        List <Integer> cantidades = new ArrayList<>();
+        List <Producto> productos = new ArrayList<>();
+        
+        for(int i = 0; i<jtTabla.getRowCount(); i++){
+            cantidades.add((Integer)jtTabla.getValueAt(i, 3));
+        }
+        for(int i = 0; i<jtTabla.getRowCount(); i++){
+            
+            int codigo = (Integer)jtTabla.getValueAt(i, 0);
+            Producto produc = pc.buscarProductoxCodigo(codigo);
+            productos.add(produc);
+        }
+        
+        Mesa mesa =(Mesa) jcMesa.getSelectedItem();
+        Mesero mesero = LoginView.mesero;
+        boolean estado = false;
+        LocalDate fecha = LocalDate.now();
+        LocalTime hora = LocalTime.now();
+        double importe = Double.parseDouble(jtImporte.getText());
+        boolean cobrado = false;
+        
+        Pedido ped = new Pedido(estado, fecha, hora, mesa, mesero, productos, importe, cobrado);
+        pedidoc.ingresarPedido(ped, cantidades);
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        // TODO add your handling code here:
+        Producto prod = new Producto();
+        prod = (Producto)jcProducto.getSelectedItem();
+        int cantidad = (Integer) jcStock.getSelectedItem();
+        if(modelo.getRowCount() != 0){
+            for(int i = 0; i<modelo.getRowCount(); i++){
+                if(prod.getCodigo() == (Integer)modelo.getValueAt(i, 0)){
+                    modelo.setValueAt((Integer)modelo.getValueAt(i, 3)+cantidad, i, 3);
+                    break;
+                }else if(i == modelo.getRowCount()-1){
+                    modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
+                    break;
+                }
+            }
+        }else{
+        modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
+        }
+        double valor = prod.getPrecio()*cantidad;
+        suma+=valor;
+        jtImporte.setText(suma+"");
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel1;
@@ -203,10 +328,13 @@ public class CreatePedidoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbQuitar;
     private javax.swing.JComboBox<Mesa> jcMesa;
     private javax.swing.JComboBox<Producto> jcProducto;
+    private javax.swing.JComboBox<Integer> jcStock;
     private javax.swing.JTextField jtImporte;
     private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
@@ -214,6 +342,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
         modelo.addColumn("Codigo");
         modelo.addColumn("Producto");
         modelo.addColumn("Precio");
+        modelo.addColumn("Cantidad");
         jtTabla.setModel(modelo);
     }
     
@@ -225,5 +354,14 @@ public class CreatePedidoView extends javax.swing.JFrame {
         for(Producto producto : pc.listarProductos()){
             jcProducto.addItem(producto);
         }
+    }
+    
+    private void borrarFilas(){
+        int f=jtTabla.getRowCount()-1;
+        for(;f>=0;f--){
+            modelo.removeRow(f);
+        }
+        jtImporte.setText("");
+        suma = 0;
     }
 }

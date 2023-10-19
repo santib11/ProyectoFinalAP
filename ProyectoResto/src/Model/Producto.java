@@ -11,17 +11,17 @@ public class Producto {
     public Producto() {
     }
         
-    public Producto(int codigo, int cantidad, String nombre, double precio) {
+    public Producto(int codigo, int stock, String nombre, double precio) {
         this.codigo = codigo;
-        this.stock = cantidad;
+        this.stock = stock;
         this.nombre = nombre;
         this.precio = precio;
     }
 
-    public Producto(int idProducto, int codigo, int cantidad, String nombre, double precio) {
+    public Producto(int idProducto, int codigo, int stock, String nombre, double precio) {
         this.idProducto = idProducto;
         this.codigo = codigo;
-        this.stock = cantidad;
+        this.stock = stock;
         this.nombre = nombre;
         this.precio = precio;
     }

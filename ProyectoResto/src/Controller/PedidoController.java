@@ -4,6 +4,7 @@ package Controller;
 import Model.Mesa;
 import Model.Mesero;
 import Model.Pedido;
+import Model.Producto;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,8 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PedidoController {
@@ -29,7 +28,7 @@ public class PedidoController {
         con = Conexion.getConexion();
     }
     
-    public void ingresarPedido(Pedido pedido){
+    public void ingresarPedido(Pedido pedido, List <Integer> cantidades){
         String sql = "INSERT INTO pedido (idMesa, idMesero, estado, fecha, importe, cobrado, hora) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,6 +46,16 @@ public class PedidoController {
                 JOptionPane.showMessageDialog(null, "Pedido realizado.");
             }
             ps.close();
+            int i=0;
+            for(Producto p: pedido.getProductos()){
+                String sql2 = "INSERT INTO pedidoproducto (idPedido, idProducto, cantidad) VALUES (?,?,?)";
+                PreparedStatement ps2 = con.prepareStatement(sql2);
+                ps2.setInt(1, pedido.getIdPedido());
+                ps2.setInt(2, p.getIdProducto());
+                ps2.setInt(3, cantidades.get(i));
+                ps2.executeUpdate();
+                i++;
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido " + ex.getMessage());
         }

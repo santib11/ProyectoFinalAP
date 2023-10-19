@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProductoController {
@@ -63,6 +65,30 @@ public class ProductoController {
         return producto;
     }
     
+    public Producto buscarProductoxCodigo(int codigo){
+        Producto producto = null;
+        String sql = "SELECT * FROM producto WHERE codigo = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setCodigo(codigo);
+                producto.setNombre(rs.getString("nombre"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+            }else {
+                JOptionPane.showMessageDialog(null, "No existe el producto con ese codigo");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
+        }      
+        return producto;
+    }
+  
     //BUSCAR TODOS LOS PRODUCTOS
      public List<Producto> listarProductos() {
 
