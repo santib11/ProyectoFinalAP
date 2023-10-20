@@ -39,6 +39,29 @@ public class ReservaController {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva");
         }
     }
+    
+    public Reserva getReserva(int id) {
+        Reserva reserva = new Reserva();
+        try {
+            String sql = "SELECT * FROM reserva WHERE idReserva = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                reserva.setIdReserva(rs.getInt("idReserva"));
+                reserva.setNombre(rs.getString("nombre"));
+                reserva.setDni(rs.getInt("dni"));
+                reserva.setFecha(rs.getDate("fecha").toLocalDate());
+                reserva.setEstado(rs.getBoolean("estado"));
+                reserva.setMesa(mController.buscarMesaXId(rs.getInt("idMesa")));
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Reserva " + ex.getMessage());
+        }
+        return reserva;
+    }
 
     public List<Reserva> getAllReserva() {
         List<Reserva> reservas = new ArrayList<>();
@@ -94,7 +117,7 @@ public class ReservaController {
             ps.setInt(1, idReserva);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Reserva cancelada correctamente");
+                System.out.println("Reserva eliminada");
             }
             ps.close();
         } catch (SQLException ex) {

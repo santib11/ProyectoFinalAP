@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 public class ReservaView extends javax.swing.JFrame {
 
     private ReservaController rController = new ReservaController();
+    public static Reserva reservaSeleccionada = null;
+    
     private DefaultTableModel modelReserva = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
@@ -171,7 +173,7 @@ public class ReservaView extends javax.swing.JFrame {
             int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere tomar esta reserva?", "Tomar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (confirm == JOptionPane.YES_NO_OPTION) {
                 int idReserva = (int) jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
-                //rController.bajaReserva(idReserva);
+                reservaSeleccionada = rController.getReserva(idReserva);
                 this.setVisible(false);
                 CreatePedidoView cpv = new CreatePedidoView();
                 cpv.setVisible(true);
@@ -193,6 +195,7 @@ public class ReservaView extends javax.swing.JFrame {
             if (confirm == JOptionPane.YES_NO_OPTION) {
                 int idReserva = (int) jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
                 rController.bajaReserva(idReserva);
+                JOptionPane.showMessageDialog(null, "Reserva cancelada correctamente");
             }
         } catch (Exception e) {
             System.out.println("Seleccione un elemento de la tabla");

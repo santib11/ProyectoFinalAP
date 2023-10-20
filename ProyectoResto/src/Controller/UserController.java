@@ -56,6 +56,26 @@ public class UserController {
         return user;
     }
     
+    public User buscarUserxId(int id) {
+        User user = null;
+        String sql = "SELECT * FROM user WHERE idUser = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setIdUser(id);
+                user.setUsuario(rs.getString("usuario"));
+                user.setPassword(rs.getString("contraseña"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla User " + e.getMessage());
+        }
+        return user;
+    }
+    
     public boolean existUsuario(String username) {
         boolean ok = false;
         String sql = "SELECT * FROM user WHERE usuario = ?";

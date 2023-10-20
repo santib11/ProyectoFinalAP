@@ -4,6 +4,7 @@ package Controller;
 import Model.Mesa;
 import Model.Mesero;
 import Model.Pedido;
+import Model.Producto;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,8 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class PedidoController {
@@ -29,7 +28,7 @@ public class PedidoController {
         con = Conexion.getConexion();
     }
     
-    public void ingresarPedido(Pedido pedido){
+    public void ingresarPedido(Pedido pedido, List <Integer> cantidades){
         String sql = "INSERT INTO pedido (idMesa, idMesero, estado, fecha, importe, cobrado, hora) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,13 +46,50 @@ public class PedidoController {
                 JOptionPane.showMessageDialog(null, "Pedido realizado.");
             }
             ps.close();
+            int i=0;
+            for(Producto p: pedido.getProductos()){
+                String sql2 = "INSERT INTO pedidoproducto (idPedido, idProducto, cantidad) VALUES (?,?,?)";
+                PreparedStatement ps2 = con.prepareStatement(sql2);
+                ps2.setInt(1, pedido.getIdPedido());
+                ps2.setInt(2, p.getIdProducto());
+                ps2.setInt(3, cantidades.get(i));
+                ps2.executeUpdate();
+                i++;
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido " + ex.getMessage());
         }
     }
     
+    public Pedido buscarPedido(int id){
+        Pedido pedido = new Pedido();
+        try {
+            String sql = "SELECT * FROM pedido WHERE idPedido = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                Mesa mesa = mc.buscarMesaXId(rs.getInt("idMesa"));
+                Mesero mesero = meseroc.buscarMesero(rs.getInt("idMesero"));
+                pedido.setMesa(mesa);
+                pedido.setMesero(mesero);
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setFecha(rs.getDate("fecha").toLocalDate());
+                pedido.setImporte(rs.getDouble("importe"));
+                pedido.setCobrado(rs.getBoolean("cobrado"));
+                pedido.setHora(rs.getTime("hora").toLocalTime());
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
+        }
+        return pedido;
+    }
+    
     public void entregarPedido (int idPedido){
-        String sql = "UPDATE pedido SET estado = 0 WHERE idPedido = ?";
+        String sql = "UPDATE pedido SET estado = 1 WHERE idPedido = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -64,7 +100,7 @@ public class PedidoController {
     }
     
     public void cobrarPedido(int idPedido){
-        String sql = "UPDATE pedido SET cobrado = 0 WHERE idPedido = ?";
+        String sql = "UPDATE pedido SET cobrado = 1 WHERE idPedido = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -229,7 +265,7 @@ public class PedidoController {
     public List <Pedido> getAllPedidosOf(int idMesero, LocalDate fecha){
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM pedido WHERE idMesero = ? AND fecha = ? AND estado = 1";
+            String sql = "SELECT * FROM pedido WHERE idMesero = ? AND fecha = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMesero);
             ps.setDate(2,Date.valueOf(fecha));

@@ -38,14 +38,14 @@ public class CreateProductoView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jbGuardar.setText("Guardar");
+        jbGuardar.setText("Crear");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
             }
         });
 
-        jbModificar.setText("Modificar");
+        jbModificar.setText("Editar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
@@ -81,9 +81,9 @@ public class CreateProductoView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
+                        .addGap(294, 294, 294)
                         .addComponent(jbGuardar)
-                        .addGap(36, 36, 36)
+                        .addGap(43, 43, 43)
                         .addComponent(jbModificar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(222, 222, 222)
@@ -192,7 +192,7 @@ public class CreateProductoView extends javax.swing.JFrame {
             int cod = Integer.parseInt(jtCodigo.getText());
             double precio = Double.valueOf(jtPrecio.getText()); // pasar a double
             String nombre = jtNombre.getText();
-            int cantidad =Integer.parseInt(jtStock.getText());
+            int cantidad = Integer.parseInt(jtStock.getText());
             Producto prod = new Producto(cod,cantidad,nombre,precio);
             pc.modificarProducto(prod);
         }catch(NumberFormatException ex){
@@ -216,7 +216,7 @@ public class CreateProductoView extends javax.swing.JFrame {
             int cod = Integer.parseInt(jtCodigo.getText());
             double precio = Double.valueOf(jtPrecio.getText()); // pasar a double
             String nombre = jtNombre.getText();
-            int cantidad =Integer.parseInt(jtStock.getText());
+            int cantidad = Integer.parseInt(jtStock.getText());
             Producto prod = new Producto(cod,cantidad,nombre,precio);
             pc.altaProducto(prod);
         }catch(NumberFormatException ex){
@@ -231,7 +231,7 @@ public class CreateProductoView extends javax.swing.JFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try{
             int cod = Integer.parseInt(jtCodigo.getText());
-            prodActual = pc.buscarProducto(cod);
+            prodActual = pc.buscarProductoxCodigo(cod);
             jtNombre.setText(prodActual.getNombre());
             jtPrecio.setText(prodActual.getPrecio()+"");
             jtStock.setText(prodActual.getStock() +"");
