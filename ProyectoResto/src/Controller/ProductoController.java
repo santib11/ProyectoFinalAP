@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProductoController {
@@ -135,26 +133,6 @@ public class ProductoController {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
         }
     }
-    
-    
-    //ELIMINACION LOGICA
-    /*public void eliminarProducto(int id){
-        String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ?";
-        PreparedStatement ps;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int resultado = ps.executeUpdate();
-            if(resultado == 1){
-                JOptionPane.showMessageDialog(null, "Se dio de baja correctamente el producto");
-            }else JOptionPane.showMessageDialog(null, "No se encontro un producto con ese id");
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
-        }
-    } 
-    */
-    
     
     // ELIMINACION FISICA
     public void bajaProducto(int codigo){

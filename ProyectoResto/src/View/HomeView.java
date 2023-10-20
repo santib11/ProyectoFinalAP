@@ -2,7 +2,6 @@ package View;
 
 import Controller.PedidoController;
 import Model.Pedido;
-import Model.Producto;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -13,6 +12,7 @@ public class HomeView extends javax.swing.JFrame {
 
     private PedidoController pController = new PedidoController();
     private DefaultListModel modelProductos = new DefaultListModel();
+    
     private DefaultTableModel modelPedidos = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;

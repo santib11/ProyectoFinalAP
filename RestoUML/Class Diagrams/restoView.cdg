@@ -2,16 +2,30 @@
 
 <ClassDiagram name="restoView">
   <ClassDiagramComponents>
-    <Class name="HomeView" package="" visibility="public" xPosition="238.0" yPosition="118.0">
-      <Fields/>
-      <Constructors/>
+    <Class name="HomeView" package="" visibility="public" xPosition="24.0" yPosition="33.0">
+      <Fields>
+        <Field name="pController" type="PedidoController" visibility="private"/>
+        <Field name="modelProductos" type="DefaultListModel" visibility="private"/>
+        <Field name="modelPedidos" type="DefaultTableModel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
       <Methods>
-        <Method name="jLabelUserMouseClicked" returnType="void" visibility="private"/>
+        <Method name="editModelPedidos" returnType="void" visibility="private"/>
+        <Method name="loadTablePedidos" returnType="void" visibility="private"/>
+        <Method name="showProductosOf" returnType="int" visibility="private">
+          <Argument type="int" name="idPedido"/>
+        </Method>
       </Methods>
     </Class>
-    <Class name="LoginView" package="" visibility="public" xPosition="552.0" yPosition="118.0">
-      <Fields/>
-      <Constructors/>
+    <Class name="LoginView" package="" visibility="public" xPosition="282.0" yPosition="33.0">
+      <Fields>
+        <Field name="mesero" type="Mesero" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
       <Methods>
         <Method name="main" returnType="String" visibility="public" isStatic="true">
           <Argument type="String" name="args"/>
@@ -20,12 +34,43 @@
         <Method name="jButtonLoginActionPerformed" returnType="void" visibility="private"/>
       </Methods>
     </Class>
-    <Class name="RegisterView" package="" visibility="public" xPosition="900.0" yPosition="118.0">
+    <Class name="RegisterView" package="" visibility="public" xPosition="556.0" yPosition="33.0">
       <Fields/>
-      <Constructors/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
       <Methods>
         <Method name="jButtonBackActionPerformed" returnType="void" visibility="private"/>
         <Method name="jButtonRegisterActionPerformed" returnType="void" visibility="private"/>
+        <Method name="clean" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="ProductoView" package="" visibility="public" xPosition="830.0" yPosition="33.0">
+      <Fields>
+        <Field name="pController" type="ProductoController" visibility="private"/>
+        <Field name="modelProductos" type="DefaultTableModel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="editModelProductos" returnType="void" visibility="private"/>
+        <Method name="loadTableProductos" returnType="void" visibility="private"/>
+        <Method name="jButtonBackActionPerformed" returnType="void" visibility="private"/>
+        <Method name="jButtonQuitarProductoActionPerformed" returnType="void" visibility="private"/>
+        <Method name="jButtonCrerProductoActionPerformed" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="ReservaView" package="" visibility="public" xPosition="24.0" yPosition="337.0">
+      <Fields>
+        <Field name="reserva" type="Reserva" visibility="public" isStatic="true"/>
+        <Field name="rController" type="ReservaController" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
       </Methods>
     </Class>
   </ClassDiagramComponents>
