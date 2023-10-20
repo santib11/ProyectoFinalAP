@@ -61,8 +61,35 @@ public class PedidoController {
         }
     }
     
+    public Pedido buscarPedido(int id){
+        Pedido pedido = new Pedido();
+        try {
+            String sql = "SELECT * FROM pedido WHERE idPedido = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                pedido.setIdPedido(rs.getInt("idPedido"));
+                Mesa mesa = mc.buscarMesaXId(rs.getInt("idMesa"));
+                Mesero mesero = meseroc.buscarMesero(rs.getInt("idMesero"));
+                pedido.setMesa(mesa);
+                pedido.setMesero(mesero);
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setFecha(rs.getDate("fecha").toLocalDate());
+                pedido.setImporte(rs.getDouble("importe"));
+                pedido.setCobrado(rs.getBoolean("cobrado"));
+                pedido.setHora(rs.getTime("hora").toLocalTime());
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido " + ex.getMessage());
+        }
+        return pedido;
+    }
+    
     public void entregarPedido (int idPedido){
-        String sql = "UPDATE pedido SET estado = 0 WHERE idPedido = ?";
+        String sql = "UPDATE pedido SET estado = 1 WHERE idPedido = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -73,7 +100,7 @@ public class PedidoController {
     }
     
     public void cobrarPedido(int idPedido){
-        String sql = "UPDATE pedido SET cobrado = 0 WHERE idPedido = ?";
+        String sql = "UPDATE pedido SET cobrado = 1 WHERE idPedido = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idPedido);
@@ -238,7 +265,7 @@ public class PedidoController {
     public List <Pedido> getAllPedidosOf(int idMesero, LocalDate fecha){
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM pedido WHERE idMesero = ? AND fecha = ? AND estado = 1";
+            String sql = "SELECT * FROM pedido WHERE idMesero = ? AND fecha = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMesero);
             ps.setDate(2,Date.valueOf(fecha));

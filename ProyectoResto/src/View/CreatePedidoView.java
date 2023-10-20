@@ -5,6 +5,7 @@ import Controller.MesaController;
 import Controller.MeseroController;
 import Controller.PedidoController;
 import Controller.ProductoController;
+import Controller.ReservaController;
 import Model.Mesa;
 import Model.Mesero;
 import Model.Pedido;
@@ -26,6 +27,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
     private static MeseroController mc = new MeseroController();
     private static ProductoController pc = new ProductoController();
     private static PedidoController pedidoc = new PedidoController();
+    private static ReservaController rController = new ReservaController();
     
     public CreatePedidoView() {
         initComponents();
@@ -294,6 +296,9 @@ public class CreatePedidoView extends javax.swing.JFrame {
         
         Pedido ped = new Pedido(estado, fecha, hora, mesa, mesero, productos, importe, cobrado);
         pedidoc.ingresarPedido(ped, cantidades);
+        if (ReservaView.reservaSeleccionada != null) {  // Si hay reserva seleccionada, eliminar reserva.
+            rController.bajaReserva(ReservaView.reservaSeleccionada.getIdReserva());
+        }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed

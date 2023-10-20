@@ -158,9 +158,8 @@ public class ProductoView extends javax.swing.JFrame {
         try {
             int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere eliminar el producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (confirm == JOptionPane.YES_NO_OPTION) {
-                int idProducto = (int) jTableProductos.getValueAt(jTableProductos.getSelectedRow(), 0);
-                pController.bajaProducto(idProducto);
-                JOptionPane.showMessageDialog(null, "Producto eliminado!! ");
+                int codigo = (int) jTableProductos.getValueAt(jTableProductos.getSelectedRow(), 0);
+                pController.bajaProducto(codigo);
             }
         } catch (Exception e) {
             System.out.println("Seleccione un elemento de la tabla");
@@ -197,7 +196,7 @@ public class ProductoView extends javax.swing.JFrame {
     private void loadTableProductos() {
         for (Producto p : pController.listarProductos()) {
             modelProducto.addRow(new Object[]{
-                p.getIdProducto(),
+                p.getCodigo(),
                 p.getNombre(),
                 p.getStock(),
                 p.getPrecio(),
