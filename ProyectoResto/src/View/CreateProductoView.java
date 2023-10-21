@@ -195,6 +195,7 @@ public class CreateProductoView extends javax.swing.JFrame {
             int cantidad = Integer.parseInt(jtStock.getText());
             Producto prod = new Producto(cod,cantidad,nombre,precio);
             pc.modificarProducto(prod);
+            JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar los formatos correctos", "Error de datos", JOptionPane.WARNING_MESSAGE);
         }

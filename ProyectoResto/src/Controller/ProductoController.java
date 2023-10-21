@@ -126,10 +126,7 @@ public class ProductoController {
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCodigo());
-            int resultado = ps.executeUpdate();
-            if(resultado == 1){
-                JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
-            }else JOptionPane.showMessageDialog(null, "No se pudo actualizar");
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");

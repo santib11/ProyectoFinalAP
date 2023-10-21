@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class PedidoController {
     private static Connection con;
     MesaController mc = new MesaController();
-    MeseroController meseroc = new MeseroController(); 
+    MeseroController meseroc = new MeseroController();
     
     public PedidoController() {
 

@@ -41,7 +41,7 @@ public class ProductoView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jButtonCrerProducto.setText("Nuevo producto");
+        jButtonCrerProducto.setText("Administracion");
         jButtonCrerProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCrerProductoActionPerformed(evt);
