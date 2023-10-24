@@ -41,17 +41,17 @@ public class ProductoController {
      
      
     //BUSCAR
-    public Producto buscarProducto(int id){
+    public Producto buscarProducto(int codigo){
         Producto producto = null;
-        String sql = "SELECT * FROM producto WHERE idProducto = ?";
+        String sql = "SELECT * FROM producto WHERE codigo = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 producto = new Producto();
-                producto.setIdProducto(id);
-                producto.setCodigo(rs.getInt("codigo"));
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setCodigo(codigo);
                 producto.setNombre(rs.getString("nombre"));
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
@@ -96,16 +96,27 @@ public class ProductoController {
     
     //MODIFICAR
     public void modificarProducto(Producto producto){
-        String sql = "UPDATE producto SET codigo = ?, stock = ?, nombre = ?, precio = ? WHERE idProducto = ?";
+        String sql = "UPDATE producto SET nombre = ?, precio = ?, stock = ? WHERE codigo = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+<<<<<<< Updated upstream
            
             ps.setInt(1, producto.getCodigo());
             ps.setInt(2, producto.getStock());
             ps.setString(3, producto.getNombre());
             ps.setDouble(4, producto.getPrecio());
             ps.setInt(5, producto.getIdProducto());
+=======
+            ps.setString(1, producto.getNombre());
+            ps.setDouble(2, producto.getPrecio());
+            
+           // ps.setInt(3, producto.getCodigo());
+            ps.setDouble(3, producto.getStock());
+            ps.setInt(4, producto.getCodigo());
+            
+>>>>>>> Stashed changes
             int resultado = ps.executeUpdate();
+            
             if(resultado == 1){
                 JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
             }else JOptionPane.showMessageDialog(null, "No se pudo actualizar");
@@ -136,14 +147,23 @@ public class ProductoController {
     
     
     // ELIMINACION FISICA
+<<<<<<< Updated upstream
     public void eliminarProductoFisicamente(int idProducto){
        String sql = "DELETE FROM producto WHERE idProducto = ?";
+=======
+    public void eliminarProductoFisicamente(int codigo){
+       String sql = "DELETE FROM producto WHERE codigo = ?";
+>>>>>>> Stashed changes
        
        try {
             PreparedStatement ps = con.prepareStatement(sql);
           
             
+<<<<<<< Updated upstream
             ps.setInt(1, idProducto);
+=======
+            ps.setInt(1, codigo);
+>>>>>>> Stashed changes
             
             
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update

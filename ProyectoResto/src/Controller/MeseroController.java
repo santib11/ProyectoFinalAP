@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class MeseroController {
@@ -68,4 +70,61 @@ public class MeseroController {
         }
         return ok;
     }
+<<<<<<< Updated upstream
+=======
+    
+    public void borrarMesero(Mesero mesero){
+        String sql = "DELETE FROM mesero WHERE dni = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mesero.getDni());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Mesero eliminada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
+        }
+        
+    }
+    
+    
+    
+    //LISTAR MESEROS
+    public List<Mesero> listarMeseros() {
+
+        String sql = "SELECT idMesero, nombre, dni FROM mesero";
+        ArrayList<Mesero> meseros = new ArrayList<>();
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+             //No hay parametros dinamico del select, o sea de la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+              
+              Mesero mesero = new Mesero();
+                mesero.setIdMesero(rs.getInt("idMesero"));
+                mesero.setNombre(rs.getString("nombre"));
+                mesero.setDni(rs.getInt("dni"));
+              
+                
+                meseros.add(mesero); //agrego a la lista de meseros
+                
+              }
+              ps.close();
+              
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero");
+        }
+        
+        return meseros;
+    }
+
+    
+    
+>>>>>>> Stashed changes
 }

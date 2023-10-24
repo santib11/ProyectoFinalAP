@@ -73,6 +73,13 @@ public class Mesero {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return  nombre + ", DNI: " + dni ;
+    }
+    
+    
     
     
 }

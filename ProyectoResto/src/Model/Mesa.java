@@ -67,5 +67,13 @@ public class Mesa {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public String toString() {
+        return "IdMesa: " + idMesa + "- NRO: " + numero + "(capacidad: " + capacidad + " pers)";
+    }
+>>>>>>> Stashed changes
     
 }
