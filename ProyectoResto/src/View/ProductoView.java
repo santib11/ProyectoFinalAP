@@ -148,19 +148,15 @@ public class ProductoView extends javax.swing.JFrame {
     private void jButtonCrerProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrerProductoActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        ProductoBotonView pvv = new ProductoBotonView();
+        CreateProductoView pvv = new CreateProductoView();
         pvv.setVisible(true); 
     }//GEN-LAST:event_jButtonCrerProductoActionPerformed
 
     private void jButtonQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProductoActionPerformed
-<<<<<<< Updated upstream
-        // TODO add your handling code here:
-=======
         int codigoProd=Integer.parseInt(jTableProductos.getValueAt(jTableProductos.getSelectedRow(),0).toString());
         DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
         modelo.removeRow(jTableProductos.getSelectedRow());
         eliminarProducto(codigoProd);
->>>>>>> Stashed changes
     }//GEN-LAST:event_jButtonQuitarProductoActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -203,20 +199,11 @@ public class ProductoView extends javax.swing.JFrame {
         }
     }
     
-    
-<<<<<<< Updated upstream
-    private void eliminarProducto(int id){
-        ProductoController pc = new ProductoController();
-        pc.eliminarProductoFisicamente(id);
-    }
-    
-    
-=======
+
     private void eliminarProducto(int codigoProd){
         ProductoController pc = new ProductoController();
         
-        pc.eliminarProductoFisicamente(codigoProd);
+        pc.deleteProducto(codigoProd);
     }
-    
->>>>>>> Stashed changes
+
 }

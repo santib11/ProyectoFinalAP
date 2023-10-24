@@ -1,54 +1,49 @@
-
 package View;
 
 import Controller.MeseroController;
 import Controller.PedidoController;
 import Model.Mesero;
 import Model.Pedido;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class AdministrarView extends javax.swing.JFrame {
-    
-    private PedidoController pc ;
+
+    private PedidoController pc;
     private List<Pedido> p;
-    private List<Mesero> m;
     private MeseroController meseroControl;
-    
-    private DefaultTableModel modelPedidos = new DefaultTableModel(){
-        public boolean isCellEditable(int fila, int columna){
-            
+
+    private DefaultTableModel modelPedidos = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+
             return false;
         }
     };
 
     public AdministrarView() {
         pc = new PedidoController();
-        meseroControl= new MeseroController();
-        m = (ArrayList)meseroControl.listarMeseros();
-       
-        
-       
+        meseroControl = new MeseroController();
         initComponents();
         this.setLocationRelativeTo(null);
-         cargarJComboMeseros();
-         armarCabecera();
+        cargarJComboMeseros();
+        armarCabecera();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboMesero = new javax.swing.JComboBox<>();
         jrbPedidosAtendidos = new javax.swing.JRadioButton();
         jrbPedidosCobrados = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonBack = new javax.swing.JButton();
         jbReportesMesa = new javax.swing.JButton();
@@ -58,8 +53,6 @@ public class AdministrarView extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
-
-        jLabel1.setText("REPORTES MESERO");
 
         jLabel2.setText("Seleccionar mesero:");
 
@@ -90,6 +83,9 @@ public class AdministrarView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel1.setText("Reporte pedidos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,43 +93,41 @@ public class AdministrarView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(159, 159, 159)
-                                .addComponent(jrbPedidosAtendidos)
-                                .addGap(120, 120, 120))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addGap(63, 63, 63)))
-                        .addComponent(jComboMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jrbPedidosCobrados)
+                                .addGap(176, 176, 176)
+                                .addComponent(jrbPedidosAtendidos))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addComponent(jLabel2)))
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(146, 146, 146)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(312, 312, 312)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(173, Short.MAX_VALUE))
+                            .addComponent(jComboMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrbPedidosCobrados))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboMesero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbPedidosAtendidos)
                     .addComponent(jrbPedidosCobrados))
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
@@ -251,84 +245,77 @@ public class AdministrarView extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbPedidosCobrados;
     // End of variables declaration//GEN-END:variables
 
-private void armarCabecera() {
-        modelPedidos.addColumn("ID Pedido");
-        modelPedidos.addColumn("ID Mesa");
+    private void armarCabecera() {
+        modelPedidos.addColumn("Nro Pedido");
+        modelPedidos.addColumn("Nro Mesa");
         modelPedidos.addColumn("Fecha");
-        modelPedidos.addColumn("Estado");
-        
+        modelPedidos.addColumn("Entregado");
+
         jTable1.setModel(modelPedidos);
     }
 
-    private void cargarJComboMeseros(){
+    private void cargarJComboMeseros() {
         MeseroController mc = new MeseroController();
         List<Mesero> meseros = mc.listarMeseros();
         for (Mesero m : meseros) {
             jComboMesero.addItem(m);
         }
     }
-    
-    
-    
-    private void borrarFilas(){
-      //getRowCount devuelve el nro total de filas de la tabla, visubles o no
-        int filas = jTable1.getRowCount()-1; /*le resto 1 para usar 
-ese nro como el indice de la ultima fila, borramas las filas de atras para adelante*/
-        
-        for(int f=filas; f>=0; f--){
-          modelPedidos.removeRow(f);
-        }
-        
-        
-    }
-    
-    
-    private void pedidosAtendidosXMesero(){
-      try{  
-        Mesero meseroSelec = (Mesero)jComboMesero.getSelectedItem();
-        p = (ArrayList) pc.pedidosxMesero(meseroSelec.getIdMesero());
-        
-        for(Pedido item: p){
-            
-           modelPedidos.addRow(new Object[]{
-                
-                item.getIdPedido(),                
-                item.getMesa().getIdMesa(),
-                item.getFecha(),
-                item.isEstado()
-                
-            
-            });
-           
-        }
-     }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this,"Debe ingresar datos","Error de datos", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    
-    
-    private void pedidosCobradosXMesero(){
-      try{  
-        Mesero meseroSelec = (Mesero)jComboMesero.getSelectedItem();
-        p = (ArrayList) pc.getPedidosCobradosXMeseroEnElDia(meseroSelec.getIdMesero());
-        
-        for(Pedido item: p){
-            
-           modelPedidos.addRow(new Object[]{
-                
-                item.getIdPedido(),                
-                item.getMesa().getIdMesa(),
-                item.getFecha()
-                
-            
-            });
-           
-        }
-    }catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this,"Debe ingresar datos","Error de datos", JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    
 
+    private void borrarFilas() {
+        //getRowCount devuelve el nro total de filas de la tabla, visubles o no
+        int filas = jTable1.getRowCount() - 1;
+        /*le resto 1 para usar 
+ese nro como el indice de la ultima fila, borramas las filas de atras para adelante*/
+
+        for (int f = filas; f >= 0; f--) {
+            modelPedidos.removeRow(f);
+        }
+
+    }
+
+    private void pedidosAtendidosXMesero() {
+        try {
+            Mesero meseroSelec = (Mesero) jComboMesero.getSelectedItem();
+            p = (ArrayList) pc.pedidosxMesero(meseroSelec.getIdMesero());
+            for (Pedido item : p) {
+                String estado = "No";
+                if (item.isEstado()) {
+                estado = "Si";
+                }
+                modelPedidos.addRow(new Object[]{
+                    item.getIdPedido(),
+                    item.getMesa().getIdMesa(),
+                    item.getFecha(),
+                    estado
+                });
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar datos", "Error de datos", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void pedidosCobradosXMesero() {
+        try {
+            Mesero meseroSelec = (Mesero) jComboMesero.getSelectedItem();
+            p = (ArrayList) pc.getPedidosCobradosXMeseroEnElDia(meseroSelec.getIdMesero());
+
+            for (Pedido item : p) {
+                String estado = "No";
+                if (item.isEstado()) {
+                estado = "Si";
+                }
+                modelPedidos.addRow(new Object[]{
+                    item.getIdPedido(),
+                    item.getMesa().getIdMesa(),
+                    LocalDate.now(),
+                    estado
+                });
+
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar datos", "Error de datos", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 
 }

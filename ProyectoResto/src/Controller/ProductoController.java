@@ -65,6 +65,52 @@ public class ProductoController {
         return producto;
     }
     
+    public Producto buscarProductoxCodigo(int codigo){
+
+        Producto producto = null;
+
+        String sql = "SELECT * FROM producto WHERE codigo = ?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, codigo);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                producto = new Producto();
+
+                producto.setIdProducto(rs.getInt("idProducto"));
+
+                producto.setCodigo(codigo);
+
+                producto.setNombre(rs.getString("nombre"));
+
+                producto.setStock(rs.getInt("stock"));
+
+                producto.setPrecio(rs.getDouble("precio"));
+
+            }else {
+
+                JOptionPane.showMessageDialog(null, "No existe el producto con ese codigo");
+
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
+
+        }      
+
+        return producto;
+
+    }
+    
     //BUSCAR TODOS LOS PRODUCTOS
      public List<Producto> listarProductos() {
 
@@ -99,22 +145,20 @@ public class ProductoController {
         String sql = "UPDATE producto SET nombre = ?, precio = ?, stock = ? WHERE codigo = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-<<<<<<< Updated upstream
-           
+        
             ps.setInt(1, producto.getCodigo());
             ps.setInt(2, producto.getStock());
             ps.setString(3, producto.getNombre());
             ps.setDouble(4, producto.getPrecio());
             ps.setInt(5, producto.getIdProducto());
-=======
+
             ps.setString(1, producto.getNombre());
             ps.setDouble(2, producto.getPrecio());
             
            // ps.setInt(3, producto.getCodigo());
             ps.setDouble(3, producto.getStock());
             ps.setInt(4, producto.getCodigo());
-            
->>>>>>> Stashed changes
+
             int resultado = ps.executeUpdate();
             
             if(resultado == 1){
@@ -126,44 +170,17 @@ public class ProductoController {
         }
     }
     
-    
-    //ELIMINACION LOGICA
-    /*public void eliminarProducto(int id){
-        String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ?";
-        PreparedStatement ps;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int resultado = ps.executeUpdate();
-            if(resultado == 1){
-                JOptionPane.showMessageDialog(null, "Se dio de baja correctamente el producto");
-            }else JOptionPane.showMessageDialog(null, "No se encontro un producto con ese id");
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
-        }
-    } 
-    */
-    
-    
-    // ELIMINACION FISICA
-<<<<<<< Updated upstream
-    public void eliminarProductoFisicamente(int idProducto){
-       String sql = "DELETE FROM producto WHERE idProducto = ?";
-=======
-    public void eliminarProductoFisicamente(int codigo){
+
+    public void deleteProducto(int codigo){
        String sql = "DELETE FROM producto WHERE codigo = ?";
->>>>>>> Stashed changes
+
        
        try {
             PreparedStatement ps = con.prepareStatement(sql);
           
-            
-<<<<<<< Updated upstream
-            ps.setInt(1, idProducto);
-=======
+
             ps.setInt(1, codigo);
->>>>>>> Stashed changes
+
             
             
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update

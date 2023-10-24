@@ -70,9 +70,7 @@ public class MeseroController {
         }
         return ok;
     }
-<<<<<<< Updated upstream
-=======
-    
+
     public void borrarMesero(Mesero mesero){
         String sql = "DELETE FROM mesero WHERE dni = ?";
         try {
@@ -124,7 +122,5 @@ public class MeseroController {
         return meseros;
     }
 
-    
-    
->>>>>>> Stashed changes
+   
 }
