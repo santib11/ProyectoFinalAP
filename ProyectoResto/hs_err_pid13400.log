@@ -1,0 +1,236 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 36144 bytes for Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (t:/workspace/hotspot/src/share/vm/memory/allocation.cpp:372), pid=13400, tid=14128
+#
+# JRE version: Java(TM) SE Runtime Environment (9.0+11) (build 9.0.4+11)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (9.0.4+11, mixed mode, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dapplication.home=C:\Program Files\Java\jdk-9.0.4 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler jdk.compiler/com.sun.tools.javac.Main -d C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\classes -classpath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\classes;C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\mariadb-java-client-3.0.11.jar;D:\DESCARGAS DE INTERNET\jcalendar-1.4;D:\DESCARGAS DE INTERNET\jcalendar-1.4\lib\jcalendar-1.4.jar;D:\DESCARGAS DE INTERNET\SimTimeSelector_r23.jar -sourcepath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\empty -target 1.8 -encoding UTF-8 -g -processorpath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\mariadb-java-client-3.0.11.jar;D:\DESCARGAS DE INTERNET\jcalendar-1.4;D:\DESCARGAS DE INTERNET\jcalendar-1.4\lib\jcalendar-1.4.jar;D:\DESCARGAS DE INTERNET\SimTimeSelector_r23.jar;C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\empty -s C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\generated-sources\ap-source-output -source 1.8 C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\src\View\ReportesMesaView.java
+
+Host: AMD Ryzen 5 3500U with Radeon Vega Mobile Gfx  , 8 cores, 5G,  Windows 10 , 64 bit Build 19041 (10.0.19041.3570)
+Time: Sat Oct 21 17:15:13 2023 Hora estándar de Argentina elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000015101f60800):  JavaThread "main" [_thread_in_vm, id=14128, stack(0x000000232c100000,0x000000232c200000)]
+
+Stack: [0x000000232c100000,0x000000232c200000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x587068]
+
+[error occurred during error reporting (printing native stack), id 0xe0000001]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.module.ModuleFinder.privilegedOfSystem()Ljava/lang/module/ModuleFinder;+30 java.base
+j  java.lang.module.ModuleFinder.ofSystem()Ljava/lang/module/ModuleFinder;+35 java.base
+j  jdk.internal.module.ModuleBootstrap.boot()Ljava/lang/ModuleLayer;+4 java.base
+j  java.lang.System.initPhase2(ZZ)I+0 java.base
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00000151247ee800 JavaThread "Sweeper thread" daemon [_thread_blocked, id=16724, stack(0x000000232df00000,0x000000232e000000)]
+  0x00000151247cd800 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=7032, stack(0x000000232de00000,0x000000232df00000)]
+  0x00000151247c5000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=7856, stack(0x000000232dd00000,0x000000232de00000)]
+  0x00000151247c2000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=12024, stack(0x000000232dc00000,0x000000232dd00000)]
+  0x00000151247c0000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=8408, stack(0x000000232db00000,0x000000232dc00000)]
+  0x00000151247bb800 JavaThread "Attach Listener" daemon [_thread_blocked, id=16092, stack(0x000000232da00000,0x000000232db00000)]
+  0x00000151247ba800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=1500, stack(0x000000232d900000,0x000000232da00000)]
+  0x000001512476a000 JavaThread "Finalizer" daemon [_thread_blocked, id=10104, stack(0x000000232d800000,0x000000232d900000)]
+  0x000001512475f000 JavaThread "Reference Handler" daemon [_thread_blocked, id=14208, stack(0x000000232d700000,0x000000232d800000)]
+=>0x0000015101f60800 JavaThread "main" [_thread_in_vm, id=14128, stack(0x000000232c100000,0x000000232c200000)]
+
+Other Threads:
+  0x0000015124752800 VMThread "VM Thread" [stack: 0x000000232d600000,0x000000232d700000] [id=6276]
+  0x0000015101f79800 GCTaskThread "GC Thread#0" [stack: 0x000000232c200000,0x000000232c300000] [id=7080]
+  0x0000015101f7a800 GCTaskThread "GC Thread#1" [stack: 0x000000232c300000,0x000000232c400000] [id=15240]
+  0x0000015101f7d000 GCTaskThread "GC Thread#2" [stack: 0x000000232c400000,0x000000232c500000] [id=12084]
+  0x0000015101f7f000 GCTaskThread "GC Thread#3" [stack: 0x000000232c500000,0x000000232c600000] [id=7392]
+  0x0000015101f85800 GCTaskThread "GC Thread#4" [stack: 0x000000232c600000,0x000000232c700000] [id=14120]
+  0x0000015101f8d000 GCTaskThread "GC Thread#5" [stack: 0x000000232c700000,0x000000232c800000] [id=14832]
+  0x0000015101f8f800 GCTaskThread "GC Thread#6" [stack: 0x000000232c800000,0x000000232c900000] [id=14728]
+  0x0000015101f92000 GCTaskThread "GC Thread#7" [stack: 0x000000232c900000,0x000000232ca00000] [id=13460]
+  0x0000015102014000 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000232d300000,0x000000232d400000] [id=16176]
+  0x0000015101f8d800 ConcurrentGCThread "G1 Marker#0" [stack: 0x000000232d400000,0x000000232d500000] [id=13472]
+  0x0000015101f90000 ConcurrentGCThread "G1 Marker#1" [stack: 0x000000232d500000,0x000000232d600000] [id=16084]
+  0x0000015101fbb000 ConcurrentGCThread "G1 Refine#0" [stack: 0x000000232d100000,0x000000232d200000] [id=14352]
+  0x0000015101fba800 ConcurrentGCThread "G1 Refine#1" [stack: 0x000000232d000000,0x000000232d100000] [id=12804]
+  0x0000015101fb3000 ConcurrentGCThread "G1 Refine#2" [stack: 0x000000232cf00000,0x000000232d000000] [id=13660]
+  0x0000015101fa7800 ConcurrentGCThread "G1 Refine#3" [stack: 0x000000232ce00000,0x000000232cf00000] [id=9420]
+  0x0000015101fa6800 ConcurrentGCThread "G1 Refine#4" [stack: 0x000000232cd00000,0x000000232ce00000] [id=16536]
+  0x0000015101fa4800 ConcurrentGCThread "G1 Refine#5" [stack: 0x000000232cc00000,0x000000232cd00000] [id=10912]
+  0x0000015101fa1800 ConcurrentGCThread "G1 Refine#6" [stack: 0x000000232cb00000,0x000000232cc00000] [id=1792]
+  0x0000015101f9f800 ConcurrentGCThread "G1 Refine#7" [stack: 0x000000232ca00000,0x000000232cb00000] [id=13168]
+  0x0000015101fc3800 ConcurrentGCThread "G1 Young RemSet Sampling" [stack: 0x000000232d200000,0x000000232d300000] [id=3132]
+
+Threads with active compile tasks:
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap address: 0x00000000a0e00000, size: 1522 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ garbage-first heap   total 8192K, used 0K [0x00000000a0e00000, 0x00000000a0f00040, 0x0000000100000000)
+  region size 1024K, 1 young (1024K), 0 survivors (0K)
+ Metaspace       used 2630K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 222K, capacity 384K, committed 384K, reserved 1048576K
+Heap Regions: E=young(eden), S=young(survivor), O=old, HS=humongous(starts), HC=humongous(continues), CS=collection set, F=free, A=archive, TS=gc time stamp, AC=allocation context, TAMS=top-at-mark-start (previous, next)
+|   0|0x00000000a0e00000, 0x00000000a0e00000, 0x00000000a0f00000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a0e00000, 0x00000000a0e00000|
+|   1|0x00000000a0f00000, 0x00000000a0f00000, 0x00000000a1000000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a0f00000, 0x00000000a0f00000|
+|   2|0x00000000a1000000, 0x00000000a1000000, 0x00000000a1100000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a1000000, 0x00000000a1000000|
+|   3|0x00000000a1100000, 0x00000000a1100000, 0x00000000a1200000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a1100000, 0x00000000a1100000|
+|   4|0x00000000a1200000, 0x00000000a1200000, 0x00000000a1300000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a1200000, 0x00000000a1200000|
+|   5|0x00000000a1300000, 0x00000000a1300000, 0x00000000a1400000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a1300000, 0x00000000a1300000|
+|   6|0x00000000a1400000, 0x00000000a1400000, 0x00000000a1500000|  0%| F|  |TS  0|AC  0|TAMS 0x00000000a1400000, 0x00000000a1400000|
+|   7|0x00000000a1500000, 0x00000000a1551170, 0x00000000a1600000| 31%| E|  |TS  0|AC  0|TAMS 0x00000000a1500000, 0x00000000a1500000|
+
+Card table byte_map: [0x000001511df60000,0x000001511e260000] byte_map_base: 0x000001511da59000
+
+Marking Bits (Prev, Next): (CMBitMap*) 0x0000015102013710, (CMBitMap*) 0x0000015102013748
+ Prev Bits: [0x000001511e560000, 0x000001511fd28000)
+ Next Bits: [0x000001511fd30000, 0x00000151214f8000)
+
+Polling page: 0x00000151020a0000
+
+CodeHeap 'non-profiled nmethods': size=120000Kb used=0Kb max_used=0Kb free=120000Kb
+ bounds [0x0000015115ac0000, 0x0000015115d30000, 0x000001511cff0000]
+CodeHeap 'profiled nmethods': size=120000Kb used=7Kb max_used=7Kb free=119992Kb
+ bounds [0x000001510e590000, 0x000001510e800000, 0x0000015115ac0000]
+CodeHeap 'non-nmethods': size=5760Kb used=1127Kb max_used=1127Kb free=4632Kb
+ bounds [0x000001510dff0000, 0x000001510e260000, 0x000001510e590000]
+ total_blobs=284 nmethods=6 adapters=142
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 0.121 Thread 0x00000151247cd800    4       3       java.lang.String::isLatin1 (19 bytes)
+Event: 0.121 Thread 0x00000151247cd800 nmethod 4 0x000001510e590510 code [0x000001510e5906c0, 0x000001510e590898]
+Event: 0.121 Thread 0x00000151247cd800    2       3       java.lang.StringUTF16::getChar (60 bytes)
+Event: 0.122 Thread 0x00000151247cd800 nmethod 2 0x000001510e590910 code [0x000001510e590ac0, 0x000001510e590c78]
+Event: 0.122 Thread 0x00000151247cd800    5       3       java.lang.String::charAt (25 bytes)
+Event: 0.122 Thread 0x00000151247cd800 nmethod 5 0x000001510e590d90 code [0x000001510e590fa0, 0x000001510e591500]
+Event: 0.122 Thread 0x00000151247cd800    6       3       java.lang.StringLatin1::charAt (28 bytes)
+Event: 0.122 Thread 0x00000151247cd800 nmethod 6 0x000001510e591710 code [0x000001510e5918e0, 0x000001510e591b30]
+Event: 0.122 Thread 0x00000151247cd800    3       3       java.lang.Object::<init> (1 bytes)
+Event: 0.123 Thread 0x00000151247cd800 nmethod 3 0x000001510e591c10 code [0x000001510e591dc0, 0x000001510e591f18]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.122 loading class java/net/URI$Parser done
+Event: 0.122 loading class sun/nio/fs/WindowsPath
+Event: 0.123 loading class sun/nio/fs/WindowsPath done
+Event: 0.123 loading class java/nio/file/LinkOption
+Event: 0.123 loading class java/nio/file/OpenOption
+Event: 0.123 loading class java/nio/file/OpenOption done
+Event: 0.123 loading class java/nio/file/CopyOption
+Event: 0.123 loading class java/nio/file/CopyOption done
+Event: 0.123 loading class java/nio/file/LinkOption done
+Event: 0.123 loading class java/nio/file/Files
+
+
+Dynamic libraries:
+0x00007ff7fc2d0000 - 0x00007ff7fc2d7000 	C:\Program Files\Java\jdk-9.0.4\bin\javac.exe
+0x00007ff960dd0000 - 0x00007ff960fc7000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff960c30000 - 0x00007ff960ced000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff95e4b0000 - 0x00007ff95e7a6000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff91a470000 - 0x00007ff91a55f000 	C:\Program Files\Java\jdk-9.0.4\bin\MSVCR120.dll
+0x00007ff955520000 - 0x00007ff955555000 	C:\Program Files\Java\jdk-9.0.4\bin\jli.dll
+0x00007ff960360000 - 0x00007ff96040e000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff960cf0000 - 0x00007ff960d8e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff95fc10000 - 0x00007ff95fcac000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff9600c0000 - 0x00007ff9601e6000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff95efe0000 - 0x00007ff95f17e000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff95e850000 - 0x00007ff95e872000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff95ee30000 - 0x00007ff95ee5c000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff9496c0000 - 0x00007ff94995a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.3570_none_60bb2a3971f3e41a\COMCTL32.dll
+0x00007ff95eb70000 - 0x00007ff95ec8a000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff95e7b0000 - 0x00007ff95e84d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff95e880000 - 0x00007ff95e980000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff956c90000 - 0x00007ff956c9a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff95f180000 - 0x00007ff95f1b0000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff91ae80000 - 0x00007ff91af26000 	C:\Program Files\Java\jdk-9.0.4\bin\msvcp120.dll
+0x000000006af60000 - 0x000000006b985000 	C:\Program Files\Java\jdk-9.0.4\bin\server\jvm.dll
+0x00007ff95ee60000 - 0x00007ff95ee68000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ff9481c0000 - 0x00007ff9481c9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff951090000 - 0x00007ff9510b7000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff960bc0000 - 0x00007ff960c2b000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff94c140000 - 0x00007ff94c14f000 	C:\Program Files\Java\jdk-9.0.4\bin\verify.dll
+0x00007ff93c6e0000 - 0x00007ff93c707000 	C:\Program Files\Java\jdk-9.0.4\bin\java.dll
+0x00007ff94a130000 - 0x00007ff94a146000 	C:\Program Files\Java\jdk-9.0.4\bin\zip.dll
+0x00007ff94c130000 - 0x00007ff94c13a000 	C:\Program Files\Java\jdk-9.0.4\bin\jimage.dll
+0x00007ff960410000 - 0x00007ff960b54000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ff95c550000 - 0x00007ff95cceb000 	C:\WINDOWS\SYSTEM32\windows.storage.dll
+0x00007ff95fd60000 - 0x00007ff9600b4000 	C:\WINDOWS\System32\combase.dll
+0x00007ff95de20000 - 0x00007ff95de4d000 	C:\WINDOWS\SYSTEM32\Wldp.dll
+0x00007ff95fcb0000 - 0x00007ff95fd5d000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ff95ee70000 - 0x00007ff95eec5000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ff95e3e0000 - 0x00007ff95e405000 	C:\WINDOWS\SYSTEM32\profapi.dll
+
+VM Arguments:
+jvm_args: -Dapplication.home=C:\Program Files\Java\jdk-9.0.4 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler 
+java_command: jdk.compiler/com.sun.tools.javac.Main -d C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\classes -classpath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\classes;C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\mariadb-java-client-3.0.11.jar;D:\DESCARGAS DE INTERNET\jcalendar-1.4;D:\DESCARGAS DE INTERNET\jcalendar-1.4\lib\jcalendar-1.4.jar;D:\DESCARGAS DE INTERNET\SimTimeSelector_r23.jar -sourcepath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\empty -target 1.8 -encoding UTF-8 -g -processorpath C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\mariadb-java-client-3.0.11.jar;D:\DESCARGAS DE INTERNET\jcalendar-1.4;D:\DESCARGAS DE INTERNET\jcalendar-1.4\lib\jcalendar-1.4.jar;D:\DESCARGAS DE INTERNET\SimTimeSelector_r23.jar;C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\empty -s C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\build\generated-sources\ap-source-output -source 1.8 C:\Users\EQUIPO 2020\Documents\GitHub\Proyecto Grupo 29\Trabajo Final - Resto\ProyectoFinalAP\ProyectoResto\src\View\ReportesMesaView.java
+java_class_path (initial): <not set>
+Launcher Type: SUN_STANDARD
+
+Logging:
+Log output configuration:
+#0: stdout all=warning uptime,level,tags
+#1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_111
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\ProgramData\ComposerSetup\bin;C:\xampp\php;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Python3\Scripts\;C:\Python3\;C:\Users\EQUIPO 2020\AppData\Local\Microsoft\WindowsApps;D:\PROGRAMAS\Microsoft VS Code\bin;C:\Users\EQUIPO 2020\AppData\Roaming\Composer\vendor\bin;C:\Users\EQUIPO 2020\AppData\Roaming\npm;C:\Users\EQUIPO 2020\AppData\Local\GitHubDesktop\bin
+USERNAME=EQUIPO 2020
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 19041 (10.0.19041.3570)
+
+CPU:total 8 (initial active 8) (8 cores per cpu, 1 threads per core) family 23 model 24 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 6228524k(1023652k free), swap 12372524k(4124k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (9.0.4+11) for windows-amd64 JRE (9.0.4+11), built on Dec 20 2017 02:18:54 by "mach5one" with MS VC++ 12.0 (VS2013)
+
+END.

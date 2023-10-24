@@ -21,13 +21,16 @@ public class ProductoController {
     
     //INSERTAR
      public void altaProducto(Producto producto){
-        String sql = "INSERT INTO producto (precio, nombre, codigo, stock) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO producto (idProducto, precio, nombre, codigo, stock) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDouble(1, producto.getPrecio());
-            ps.setString(2, producto.getNombre());
-            ps.setInt(3, producto.getCodigo());
-            ps.setInt(4, producto.getStock());
+            ps.setInt(1, producto.getIdProducto());
+            ps.setDouble(2, producto.getPrecio());
+            ps.setString(3, producto.getNombre());
+            ps.setInt(4, producto.getCodigo());
+            ps.setInt(5, producto.getStock());
+           
+           
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Producto agregado correctamente");
             ps.close();
@@ -38,31 +41,7 @@ public class ProductoController {
      
      
     //BUSCAR
-    public Producto buscarProducto(int id){
-        Producto producto = null;
-        String sql = "SELECT * FROM producto WHERE idProducto = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                producto = new Producto();
-                producto.setIdProducto(id);
-                producto.setCodigo(rs.getInt("codigo"));
-                producto.setNombre(rs.getString("nombre"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setPrecio(rs.getDouble("precio"));
-            }else {
-                JOptionPane.showMessageDialog(null, "No existe el producto con ese id");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
-        }      
-        return producto;
-    }
-    
-    public Producto buscarProductoxCodigo(int codigo){
+    public Producto buscarProducto(int codigo){
         Producto producto = null;
         String sql = "SELECT * FROM producto WHERE codigo = ?";
         try {
@@ -77,7 +56,7 @@ public class ProductoController {
                 producto.setStock(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));
             }else {
-                JOptionPane.showMessageDialog(null, "No existe el producto con ese codigo");
+                JOptionPane.showMessageDialog(null, "No existe el producto con ese id");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -85,7 +64,53 @@ public class ProductoController {
         }      
         return producto;
     }
-  
+    
+    public Producto buscarProductoxCodigo(int codigo){
+
+        Producto producto = null;
+
+        String sql = "SELECT * FROM producto WHERE codigo = ?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, codigo);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                producto = new Producto();
+
+                producto.setIdProducto(rs.getInt("idProducto"));
+
+                producto.setCodigo(codigo);
+
+                producto.setNombre(rs.getString("nombre"));
+
+                producto.setStock(rs.getInt("stock"));
+
+                producto.setPrecio(rs.getDouble("precio"));
+
+            }else {
+
+                JOptionPane.showMessageDialog(null, "No existe el producto con ese codigo");
+
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
+
+        }      
+
+        return producto;
+
+    }
+    
     //BUSCAR TODOS LOS PRODUCTOS
      public List<Producto> listarProductos() {
 
@@ -98,7 +123,7 @@ public class ProductoController {
                 Producto producto = new Producto();
 
                 producto = new Producto();
-                producto.setIdProducto(rs.getInt("idProducto"));
+              //  producto.setIdProducto(rs.getInt("idProducto"));
                 producto.setCodigo(rs.getInt("codigo"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setStock(rs.getInt("stock"));
@@ -117,14 +142,25 @@ public class ProductoController {
     
     //MODIFICAR
     public void modificarProducto(Producto producto){
-        String sql = "UPDATE producto SET stock = ?, nombre = ?, precio = ? WHERE codigo = ?";
+        String sql = "UPDATE producto SET nombre = ?, precio = ?, stock = ? WHERE codigo = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, producto.getStock());
-            ps.setString(2, producto.getNombre());
-            ps.setDouble(3, producto.getPrecio());
+        
+            ps.setInt(1, producto.getCodigo());
+            ps.setInt(2, producto.getStock());
+            ps.setString(3, producto.getNombre());
+            ps.setDouble(4, producto.getPrecio());
+            ps.setInt(5, producto.getIdProducto());
+
+            ps.setString(1, producto.getNombre());
+            ps.setDouble(2, producto.getPrecio());
+            
+           // ps.setInt(3, producto.getCodigo());
+            ps.setDouble(3, producto.getStock());
             ps.setInt(4, producto.getCodigo());
+
             int resultado = ps.executeUpdate();
+            
             if(resultado == 1){
                 JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
             }else JOptionPane.showMessageDialog(null, "No se pudo actualizar");
@@ -134,21 +170,31 @@ public class ProductoController {
         }
     }
     
-    // ELIMINACION FISICA
-    public void bajaProducto(int codigo){
+
+    public void deleteProducto(int codigo){
        String sql = "DELETE FROM producto WHERE codigo = ?";
+
+       
        try {
-            PreparedStatement ps = con.prepareStatement(sql);      
+            PreparedStatement ps = con.prepareStatement(sql);
+          
+
             ps.setInt(1, codigo);
+
+            
+            
             int filas = ps.executeUpdate(); //devuelve cantidad de filas afectadas por el update
             
             if(filas>0){
                JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente");
             }
-             ps.close(); 
+             ps.close();
+             
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "No se puede eliminar este producto");
-        }       
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Productos ");
+
+        }
+       
     }
     
 }

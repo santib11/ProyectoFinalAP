@@ -2,7 +2,6 @@
 package Controller;
 
 import Model.Mesero;
-import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,6 @@ import javax.swing.JOptionPane;
 
 public class MeseroController {
     private static Connection con;
-    UserController uc = new UserController();
     
     public MeseroController() {
 
@@ -36,7 +34,7 @@ public class MeseroController {
         }
     }
     
-    public Mesero buscarMesero(int id) {   //no seria x dni?
+    public Mesero buscarMesero(int id) {
         Mesero mesero = null;
         String sql = "SELECT idMesero, nombre, dni FROM mesero WHERE idUser = ?";
         PreparedStatement ps = null;
@@ -50,7 +48,6 @@ public class MeseroController {
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setDni(rs.getInt("dni"));
             }
-            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + e.getMessage());
         }
@@ -68,13 +65,12 @@ public class MeseroController {
             if (rs.next()) {
                 ok = true;
             }
-            ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + e.getMessage());
         }
         return ok;
     }
-    
+
     public void borrarMesero(Mesero mesero){
         String sql = "DELETE FROM mesero WHERE dni = ?";
         try {
@@ -90,28 +86,41 @@ public class MeseroController {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
         }
+        
     }
     
-    public List <Mesero> listarMeseros(){
-        String sql = "SELECT * FROM mesero";
-        ArrayList <Mesero> meseros = new ArrayList<>();
+    
+    
+    //LISTAR MESEROS
+    public List<Mesero> listarMeseros() {
+
+        String sql = "SELECT idMesero, nombre, dni FROM mesero";
+        ArrayList<Mesero> meseros = new ArrayList<>();
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+             //No hay parametros dinamico del select, o sea de la consulta
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()){
-                Mesero mesero = new Mesero();
-                
+              
+              Mesero mesero = new Mesero();
                 mesero.setIdMesero(rs.getInt("idMesero"));
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setDni(rs.getInt("dni"));
-                User usuario = uc.buscarUserxId(rs.getInt("idUser"));
-                mesero.setUser(usuario);
-                meseros.add(mesero);
-            }
-            ps.close();
+              
+                
+                meseros.add(mesero); //agrego a la lista de meseros
+                
+              }
+              ps.close();
+              
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero");
         }
+        
         return meseros;
     }
+
+   
 }

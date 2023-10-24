@@ -6,8 +6,8 @@ import Model.Producto;
 import javax.swing.JOptionPane;
 
 public class CreateProductoView extends javax.swing.JFrame {
-     private Producto prodActual = null; //variable bandera
-     private ProductoController pc = new ProductoController();
+    // private Producto prodActual = null; //variable bandera
+     //private ProductoController pc = new ProductoController();
 
     public CreateProductoView() {
         initComponents();
@@ -18,6 +18,8 @@ public class CreateProductoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jbVolver = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jbGuardar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
@@ -31,21 +33,28 @@ public class CreateProductoView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jbVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+
+        jbVolver.setText("Volver");
+        jbVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVolverActionPerformed(evt);
+            }
+        });
+
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        jbGuardar.setText("Crear");
+        jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
             }
         });
 
-        jbModificar.setText("Editar");
+        jbModificar.setText("Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
@@ -81,9 +90,9 @@ public class CreateProductoView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(294, 294, 294)
+                        .addGap(271, 271, 271)
                         .addComponent(jbGuardar)
-                        .addGap(43, 43, 43)
+                        .addGap(36, 36, 36)
                         .addComponent(jbModificar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(222, 222, 222)
@@ -143,15 +152,6 @@ public class CreateProductoView extends javax.swing.JFrame {
                 .addGap(84, 84, 84))
         );
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-
-        jbVolver.setText("Volver");
-        jbVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbVolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,40 +159,43 @@ public class CreateProductoView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jbVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(679, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jbVolver)
-                .addGap(14, 14, 14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
                                          //MODIFICAR
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        try{
+       try{
+            ProductoController pc = new ProductoController();
             int cod = Integer.parseInt(jtCodigo.getText());
-            double precio = Double.valueOf(jtPrecio.getText()); // pasar a double
             String nombre = jtNombre.getText();
             int cantidad = Integer.parseInt(jtStock.getText());
+            double precio = Double.valueOf(jtPrecio.getText());
+            
             Producto prod = new Producto(cod,cantidad,nombre,precio);
             pc.modificarProducto(prod);
         }catch(NumberFormatException ex){
@@ -212,11 +215,15 @@ public class CreateProductoView extends javax.swing.JFrame {
     }//GEN-LAST:event_jbVolverActionPerformed
                                        //ALTA
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        ProductoController pc = new ProductoController();
         try{
             int cod = Integer.parseInt(jtCodigo.getText());
             double precio = Double.valueOf(jtPrecio.getText()); // pasar a double
             String nombre = jtNombre.getText();
-            int cantidad = Integer.parseInt(jtStock.getText());
+            int codigo = Integer.parseInt(jtCodigo.getText());
+            int cantidad =Integer.parseInt(jtStock.getText());
+             
+
             Producto prod = new Producto(cod,cantidad,nombre,precio);
             pc.altaProducto(prod);
         }catch(NumberFormatException ex){
@@ -230,11 +237,22 @@ public class CreateProductoView extends javax.swing.JFrame {
                                         //BUSCAR
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try{
-            int cod = Integer.parseInt(jtCodigo.getText());
-            prodActual = pc.buscarProductoxCodigo(cod);
+           /* int cod = Integer.parseInt(jtCodigo.getText());
+            ProductoController pc = new ProductoController();
+           prodActual = pc.buscarProducto(cod); 
+            
             jtNombre.setText(prodActual.getNombre());
             jtPrecio.setText(prodActual.getPrecio()+"");
-            jtStock.setText(prodActual.getStock() +"");
+            jtStock.setText(prodActual.getStock() +""); */
+            
+            int cod = Integer.parseInt(jtCodigo.getText());
+            ProductoController pc = new ProductoController();
+            Producto prod = pc.buscarProducto(cod);
+            jtNombre.setText(prod.getNombre());
+            jtPrecio.setText(prod.getPrecio()+"");
+            jtStock.setText(prod.getStock() +"");
+            
+            
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "El codigo debe estar conformado por numeros", "Editar codigo", JOptionPane.WARNING_MESSAGE);
         }

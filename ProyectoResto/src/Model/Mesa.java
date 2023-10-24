@@ -69,7 +69,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Mesa " + numero + "(capacidad: " + capacidad + " pers)";
+        return "Mesa nro " + numero + " (capacidad:" + capacidad + ")";
     }
-    
+
 }

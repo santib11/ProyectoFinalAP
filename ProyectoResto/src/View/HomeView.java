@@ -350,10 +350,10 @@ public class HomeView extends javax.swing.JFrame {
 
     private void loadTablePedidos() {
         for (Pedido p : pController.getAllPedidosOf(LoginView.mesero.getIdMesero(), LocalDate.now())) {
-            String cobrado = "Cobrado";
+            String cobrado = "Si";
             String estado = "No";
             if (!p.isCobrado()) {
-                cobrado = "No Cobrado";
+                cobrado = "No";
             }
             if (p.isEstado()) {
                 estado = "Si";

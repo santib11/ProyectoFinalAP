@@ -77,7 +77,7 @@ public class MesaController {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 mesa = new Mesa();
-                mesa.setIdMesa(rs.getInt(idMesa));
+                mesa.setIdMesa(idMesa);
                 mesa.setNumero(rs.getInt("numero"));
                 mesa.setEstado(rs.getBoolean("estado"));
                 mesa.setCapacidad(rs.getInt("capacidad"));

@@ -190,7 +190,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jbQuitar)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +211,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbQuitar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -251,9 +251,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
         jcStock.removeAllItems();
         Producto prod = new Producto();
         prod = (Producto)jcProducto.getSelectedItem();
-        for(int i = 1;i <= prod.getStock();i++){
-            jcStock.addItem(i);
-        }
+        actualizarStockTabla(prod.getStock());
     }//GEN-LAST:event_jcProductoActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
@@ -265,9 +263,12 @@ public class CreatePedidoView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int filaselec = jtTabla.getSelectedRow();
         if (filaselec !=-1){
+            int stock = jcStock.getItemCount();
+            stock += (Integer)jtTabla.getValueAt(jtTabla.getSelectedRow(), 3);
             suma -= ((Double)jtTabla.getValueAt(jtTabla.getSelectedRow(), 2) * (Integer)jtTabla.getValueAt(jtTabla.getSelectedRow(), 3));
             jtImporte.setText(suma+"");
             modelo.removeRow(filaselec);
+            actualizarStockTabla(stock);
         }
     }//GEN-LAST:event_jbQuitarActionPerformed
 
@@ -285,6 +286,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
             Producto produc = pc.buscarProductoxCodigo(codigo);
             productos.add(produc);
         }
+        actualizarStock(productos, cantidades);
         
         Mesa mesa =(Mesa) jcMesa.getSelectedItem();
         Mesero mesero = LoginView.mesero;
@@ -299,6 +301,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
         if (ReservaView.reservaSeleccionada != null) {  // Si hay reserva seleccionada, eliminar reserva.
             rController.bajaReserva(ReservaView.reservaSeleccionada.getIdReserva());
         }
+        borrarFilas();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
@@ -319,6 +322,9 @@ public class CreatePedidoView extends javax.swing.JFrame {
         }else{
         modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
         }
+        prod.setStock(prod.getStock()-cantidad);
+        jcStock.removeAllItems();
+        actualizarStockTabla(prod.getStock());
         double valor = prod.getPrecio()*cantidad;
         suma+=valor;
         jtImporte.setText(suma+"");
@@ -368,5 +374,27 @@ public class CreatePedidoView extends javax.swing.JFrame {
         }
         jtImporte.setText("");
         suma = 0;
+    }
+    
+    private void actualizarStockTabla(int stock){
+        for(int i = 1;i <= stock;i++){
+            jcStock.addItem(i);
+        }
+        if (jcStock.getItemCount()!=0){
+            jbAgregar.setVisible(true);
+            jcStock.setVisible(true);
+        }else{
+            jbAgregar.setVisible(false);
+            jcStock.setVisible(false);
+        }
+    }
+    
+    private void actualizarStock(List <Producto> productos, List <Integer> cantidad){
+        int i=0;
+        for(Producto p: productos){
+            p.setStock(p.getStock()-cantidad.get(i));
+            pc.modificarProducto(p);
+            i++;
+        }
     }
 }
