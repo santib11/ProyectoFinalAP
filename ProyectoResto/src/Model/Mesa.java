@@ -13,10 +13,11 @@ public class Mesa {
     public Mesa() {
     }
 
-    public Mesa(int numero, int capacidad, boolean estado) {
+    public Mesa(int numero, int capacidad, boolean estado, List<Pedido> pedidos) {
         this.numero = numero;
         this.capacidad = capacidad;
         this.estado = estado;
+        this.pedidos = pedidos;
     }
 
     public Mesa(int idMesa, int numero, int capacidad, boolean estado, List<Pedido> pedidos) {
@@ -66,10 +67,13 @@ public class Mesa {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+<<<<<<< Updated upstream
+=======
 
     @Override
     public String toString() {
-        return "Mesa " + numero + "(capacidad: " + capacidad + " pers)";
+        return "IdMesa: " + idMesa + "- NRO: " + numero + "(capacidad: " + capacidad + " pers)";
     }
+>>>>>>> Stashed changes
     
 }
