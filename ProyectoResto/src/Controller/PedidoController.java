@@ -92,6 +92,70 @@ public class PedidoController {
 
     }
 
+    public void ingresarPedidoXReserva(Pedido pedido, List<Integer> cantidades, int idMesa) {
+
+        String sql = "INSERT INTO pedido (idMesa, idMesero, estado, fecha, importe, cobrado, hora) VALUES (?,?,?,?,?,?,?)";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, idMesa);
+
+            ps.setInt(2, pedido.getMesero().getIdMesero());
+
+            ps.setBoolean(3, pedido.isEstado());
+
+            ps.setDate(4, Date.valueOf(pedido.getFecha()));
+
+            ps.setDouble(5, pedido.getImporte());
+
+            ps.setBoolean(6, pedido.isCobrado());
+
+            ps.setTime(7, Time.valueOf(pedido.getHora()));
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+
+                pedido.setIdPedido(rs.getInt(1));
+
+                JOptionPane.showMessageDialog(null, "Pedido realizado.");
+
+            }
+
+            ps.close();
+
+            int i = 0;
+
+            for (Producto p : pedido.getProductos()) {
+
+                String sql2 = "INSERT INTO pedidoproducto (idPedido, idProducto, cantidad) VALUES (?,?,?)";
+
+                PreparedStatement ps2 = con.prepareStatement(sql2);
+
+                ps2.setInt(1, pedido.getIdPedido());
+
+                ps2.setInt(2, p.getIdProducto());
+
+                ps2.setInt(3, cantidades.get(i));
+
+                ps2.executeUpdate();
+
+                i++;
+
+            }
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido " + ex.getMessage());
+
+        }
+
+    }
+    
     public Pedido buscarPedido(int id){
 
         Pedido pedido = new Pedido();
@@ -198,7 +262,7 @@ public class PedidoController {
     public List<Pedido> pedidosxFecha(LocalDate fecha) {
         List<Pedido> pedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM pedido WHERE fecha = ?";
+            String sql = "SELECT * FROM pedido WHERE fecha = ? AND cobrado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fecha));
             ResultSet rs = ps.executeQuery();
@@ -381,6 +445,8 @@ public class PedidoController {
             while (rs.next()) {
                 Pedido pedido = new Pedido();
                 pedido.setIdPedido(rs.getInt("idPedido"));
+                pedido.setEstado(rs.getBoolean("estado"));
+                pedido.setCobrado(rs.getBoolean("cobrado"));
                 Mesero mese = meseroc.buscarMesero(rs.getInt("idMesero"));
                 Mesa mesa = mc.buscarMesa(rs.getInt("idMesa"));
                 // Mesa produ = producont.buscarMesaId(rs.getInt("idProducto"));

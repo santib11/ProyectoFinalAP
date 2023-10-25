@@ -140,36 +140,34 @@ public class ProductoController {
     }
 
     
-    //MODIFICAR
-    public void modificarProducto(Producto producto){
-        String sql = "UPDATE producto SET nombre = ?, precio = ?, stock = ? WHERE codigo = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-        
-            ps.setInt(1, producto.getCodigo());
-            ps.setInt(2, producto.getStock());
-            ps.setString(3, producto.getNombre());
-            ps.setDouble(4, producto.getPrecio());
-            ps.setInt(5, producto.getIdProducto());
 
-            ps.setString(1, producto.getNombre());
-            ps.setDouble(2, producto.getPrecio());
-            
-           // ps.setInt(3, producto.getCodigo());
-            ps.setDouble(3, producto.getStock());
+public void modificarProducto(Producto producto){
+
+        String sql = "UPDATE producto SET stock = ?, nombre = ?, precio = ? WHERE codigo = ?";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, producto.getStock());
+
+            ps.setString(2, producto.getNombre());
+
+            ps.setDouble(3, producto.getPrecio());
+
             ps.setInt(4, producto.getCodigo());
 
-            int resultado = ps.executeUpdate();
-            
-            if(resultado == 1){
-                JOptionPane.showMessageDialog(null, "Se actualizo correctamente");
-            }else JOptionPane.showMessageDialog(null, "No se pudo actualizar");
+            ps.executeUpdate();
+
             ps.close();
+
         } catch (SQLException ex) {
+
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla");
+
         }
+
     }
-    
 
     public void deleteProducto(int codigo){
        String sql = "DELETE FROM producto WHERE codigo = ?";

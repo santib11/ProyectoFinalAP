@@ -1,8 +1,9 @@
-
 package View;
 
 import Controller.ProductoController;
 import Model.Producto;
+import static View.ReservaView.reservaSeleccionada;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ProductoView extends javax.swing.JFrame {
@@ -12,7 +13,7 @@ public class ProductoView extends javax.swing.JFrame {
             return false;
         }
     };
-    
+
     public ProductoView() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -150,14 +151,21 @@ public class ProductoView extends javax.swing.JFrame {
         this.setVisible(false);
         CreateProductoView pvv = new CreateProductoView();
         pvv.setVisible(true);
-        System.out.println((int)jTableProductos.getValueAt(20, 0));
     }//GEN-LAST:event_jButtonCrerProductoActionPerformed
 
     private void jButtonQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQuitarProductoActionPerformed
-        int codigoProd=Integer.parseInt(jTableProductos.getValueAt(jTableProductos.getSelectedRow(),0).toString());
-        DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
-        modelo.removeRow(jTableProductos.getSelectedRow());
-        eliminarProducto(codigoProd);
+        try {
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere eliminar este producto?", "Eliminar producto", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (confirm == JOptionPane.YES_NO_OPTION) {
+                int codigoProd = Integer.parseInt(jTableProductos.getValueAt(jTableProductos.getSelectedRow(), 0).toString());
+                DefaultTableModel modelo = (DefaultTableModel) jTableProductos.getModel();
+                modelo.removeRow(jTableProductos.getSelectedRow());
+                eliminarProducto(codigoProd);
+            }
+        } catch (Exception e) {
+            System.out.println("excepcion");
+        }
+
     }//GEN-LAST:event_jButtonQuitarProductoActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -178,12 +186,12 @@ public class ProductoView extends javax.swing.JFrame {
     private javax.swing.JTable jTableProductos;
     // End of variables declaration//GEN-END:variables
 
-     private void editModelProductos() {
+    private void editModelProductos() {
         modelProducto.addColumn("Codigo");
         modelProducto.addColumn("Nombre");
         modelProducto.addColumn("Stock");
         modelProducto.addColumn("Precio");
-        
+
         jTableProductos.setModel(modelProducto);
     }
 
@@ -194,16 +202,13 @@ public class ProductoView extends javax.swing.JFrame {
                 p.getCodigo(),
                 p.getNombre(),
                 p.getStock(),
-                p.getPrecio(),
-                
-           });
+                p.getPrecio(),});
         }
     }
-    
 
-    private void eliminarProducto(int codigoProd){
+    private void eliminarProducto(int codigoProd) {
         ProductoController pc = new ProductoController();
-        
+
         pc.deleteProducto(codigoProd);
     }
 

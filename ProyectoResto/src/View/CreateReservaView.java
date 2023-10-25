@@ -212,7 +212,7 @@ public class CreateReservaView extends javax.swing.JFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
         }catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Crear", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Complete los campos correctamente", "Crear", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButtonCreateReservaActionPerformed
 

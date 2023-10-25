@@ -304,6 +304,8 @@ public class HomeView extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Seleccione un elemento de la tabla");
         }
+        modelPedidos.setRowCount(0);
+        loadTablePedidos();
     }//GEN-LAST:event_jButtonCobrarActionPerformed
 
     private void jButtonEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntregaActionPerformed
@@ -317,6 +319,8 @@ public class HomeView extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Seleccione un elemento de la tabla");
         }
+        modelPedidos.setRowCount(0);
+        loadTablePedidos();
     }//GEN-LAST:event_jButtonEntregaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

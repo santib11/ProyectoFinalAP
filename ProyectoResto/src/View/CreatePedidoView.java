@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.MesaController;
@@ -14,11 +13,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class CreatePedidoView extends javax.swing.JFrame {
-    private DefaultTableModel modelo = new DefaultTableModel(){
-        public boolean isCellEditable(int fila, int columna){
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
             return false;
         }
     };
@@ -28,13 +29,15 @@ public class CreatePedidoView extends javax.swing.JFrame {
     private static ProductoController pc = new ProductoController();
     private static PedidoController pedidoc = new PedidoController();
     private static ReservaController rController = new ReservaController();
-    
+
     public CreatePedidoView() {
         initComponents();
         this.setLocationRelativeTo(null);
         armarCabecera();
         armarCombosBoxs();
         borrarFilas();
+        jcMesa.setVisible(ReservaView.reservaSeleccionada == null);
+        jLabel4.setVisible(ReservaView.reservaSeleccionada == null);
     }
 
     @SuppressWarnings("unchecked")
@@ -54,7 +57,6 @@ public class CreatePedidoView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jtImporte = new javax.swing.JTextField();
         jbNuevo = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
         jbQuitar = new javax.swing.JButton();
         jcStock = new javax.swing.JComboBox<>();
         jbAgregar = new javax.swing.JButton();
@@ -130,13 +132,6 @@ public class CreatePedidoView extends javax.swing.JFrame {
             }
         });
 
-        jbCancelar.setText("Cancelar");
-        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCancelarActionPerformed(evt);
-            }
-        });
-
         jbQuitar.setText("Quitar");
         jbQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,11 +169,9 @@ public class CreatePedidoView extends javax.swing.JFrame {
                         .addComponent(jcStock, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbAgregar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(337, 337, 337)
-                        .addComponent(jbNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbCancelar))
+                        .addComponent(jbNuevo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -216,9 +209,7 @@ public class CreatePedidoView extends javax.swing.JFrame {
                     .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNuevo)
-                    .addComponent(jbCancelar))
+                .addComponent(jbNuevo)
                 .addGap(46, 46, 46))
         );
 
@@ -244,29 +235,25 @@ public class CreatePedidoView extends javax.swing.JFrame {
         this.setVisible(false);
         HomeView Hv = new HomeView();
         Hv.setVisible(true);
+        ReservaView.reservaSeleccionada = null;
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jcProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcProductoActionPerformed
         // TODO add your handling code here:
         jcStock.removeAllItems();
         Producto prod = new Producto();
-        prod = (Producto)jcProducto.getSelectedItem();
+        prod = (Producto) jcProducto.getSelectedItem();
         actualizarStockTabla(prod.getStock());
     }//GEN-LAST:event_jcProductoActionPerformed
-
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        // TODO add your handling code here:
-        borrarFilas();
-    }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbQuitarActionPerformed
         // TODO add your handling code here:
         int filaselec = jtTabla.getSelectedRow();
-        if (filaselec !=-1){
+        if (filaselec != -1) {
             int stock = jcStock.getItemCount();
-            stock += (Integer)jtTabla.getValueAt(jtTabla.getSelectedRow(), 3);
-            suma -= ((Double)jtTabla.getValueAt(jtTabla.getSelectedRow(), 2) * (Integer)jtTabla.getValueAt(jtTabla.getSelectedRow(), 3));
-            jtImporte.setText(suma+"");
+            stock += (Integer) jtTabla.getValueAt(jtTabla.getSelectedRow(), 3);
+            suma -= ((Double) jtTabla.getValueAt(jtTabla.getSelectedRow(), 2) * (Integer) jtTabla.getValueAt(jtTabla.getSelectedRow(), 3));
+            jtImporte.setText(suma + "");
             modelo.removeRow(filaselec);
             actualizarStockTabla(stock);
         }
@@ -274,60 +261,69 @@ public class CreatePedidoView extends javax.swing.JFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
-        List <Integer> cantidades = new ArrayList<>();
-        List <Producto> productos = new ArrayList<>();
-        
-        for(int i = 0; i<jtTabla.getRowCount(); i++){
-            cantidades.add((Integer)jtTabla.getValueAt(i, 3));
+        try {
+            List<Integer> cantidades = new ArrayList<>();
+            List<Producto> productos = new ArrayList<>();
+
+            for (int i = 0; i < jtTabla.getRowCount(); i++) {
+                cantidades.add((Integer) jtTabla.getValueAt(i, 3));
+            }
+            for (int i = 0; i < jtTabla.getRowCount(); i++) {
+
+                int codigo = (Integer) jtTabla.getValueAt(i, 0);
+                Producto produc = pc.buscarProductoxCodigo(codigo);
+                productos.add(produc);
+            }
+            actualizarStock(productos, cantidades);
+
+            Mesa mesa = (Mesa) jcMesa.getSelectedItem();
+            Mesero mesero = LoginView.mesero;
+            boolean estado = false;
+            LocalDate fecha = LocalDate.now();
+            LocalTime hora = LocalTime.now();
+            double importe = Double.parseDouble(jtImporte.getText());
+            boolean cobrado = false;
+
+            Pedido ped = new Pedido(estado, fecha, hora, mesa, mesero, productos, importe, cobrado);
+
+            if (ReservaView.reservaSeleccionada != null) {  // Si hay reserva seleccionada, eliminar reserva.
+                pedidoc.ingresarPedidoXReserva(ped, cantidades, ReservaView.reservaSeleccionada.getMesa().getIdMesa());
+                rController.bajaReserva(ReservaView.reservaSeleccionada.getIdReserva());
+            } else {
+                pedidoc.ingresarPedido(ped, cantidades);
+            }
+            //CAMBIAR EL ESTADO DE MESA A OCUPADO
+            this.jButtonBackActionPerformed(evt);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar algun producto", "Crear", JOptionPane.WARNING_MESSAGE);
         }
-        for(int i = 0; i<jtTabla.getRowCount(); i++){
-            
-            int codigo = (Integer)jtTabla.getValueAt(i, 0);
-            Producto produc = pc.buscarProductoxCodigo(codigo);
-            productos.add(produc);
-        }
-        actualizarStock(productos, cantidades);
-        
-        Mesa mesa =(Mesa) jcMesa.getSelectedItem();
-        Mesero mesero = LoginView.mesero;
-        boolean estado = false;
-        LocalDate fecha = LocalDate.now();
-        LocalTime hora = LocalTime.now();
-        double importe = Double.parseDouble(jtImporte.getText());
-        boolean cobrado = false;
-        
-        Pedido ped = new Pedido(estado, fecha, hora, mesa, mesero, productos, importe, cobrado);
-        pedidoc.ingresarPedido(ped, cantidades);
-        if (ReservaView.reservaSeleccionada != null) {  // Si hay reserva seleccionada, eliminar reserva.
-            rController.bajaReserva(ReservaView.reservaSeleccionada.getIdReserva());
-        }
-        borrarFilas();
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
         Producto prod = new Producto();
-        prod = (Producto)jcProducto.getSelectedItem();
+        prod = (Producto) jcProducto.getSelectedItem();
         int cantidad = (Integer) jcStock.getSelectedItem();
-        if(modelo.getRowCount() != 0){
-            for(int i = 0; i<modelo.getRowCount(); i++){
-                if(prod.getCodigo() == (Integer)modelo.getValueAt(i, 0)){
-                    modelo.setValueAt((Integer)modelo.getValueAt(i, 3)+cantidad, i, 3);
+        if (modelo.getRowCount() != 0) {
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                if (prod.getCodigo() == (Integer) modelo.getValueAt(i, 0)) {
+                    modelo.setValueAt((Integer) modelo.getValueAt(i, 3) + cantidad, i, 3);
                     break;
-                }else if(i == modelo.getRowCount()-1){
+                } else if (i == modelo.getRowCount() - 1) {
                     modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
                     break;
                 }
             }
-        }else{
-        modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
+        } else {
+            modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), prod.getPrecio(), cantidad});
         }
-        prod.setStock(prod.getStock()-cantidad);
+        prod.setStock(prod.getStock() - cantidad);
         jcStock.removeAllItems();
         actualizarStockTabla(prod.getStock());
-        double valor = prod.getPrecio()*cantidad;
-        suma+=valor;
-        jtImporte.setText(suma+"");
+        double valor = prod.getPrecio() * cantidad;
+        suma += valor;
+        jtImporte.setText(suma + "");
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -340,7 +336,6 @@ public class CreatePedidoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAgregar;
-    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbQuitar;
     private javax.swing.JComboBox<Mesa> jcMesa;
@@ -349,50 +344,51 @@ public class CreatePedidoView extends javax.swing.JFrame {
     private javax.swing.JTextField jtImporte;
     private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
-    private void armarCabecera(){
+    private void armarCabecera() {
         modelo.addColumn("Codigo");
         modelo.addColumn("Producto");
         modelo.addColumn("Precio");
         modelo.addColumn("Cantidad");
         jtTabla.setModel(modelo);
     }
-    
-    private void armarCombosBoxs(){
-        for(Mesa mesa: mesac.listarMesas()){
+
+    private void armarCombosBoxs() {
+        for (Mesa mesa : mesac.listarMesas()) {
             jcMesa.addItem(mesa);
         }
-        
-        for(Producto producto : pc.listarProductos()){
+
+        for (Producto producto : pc.listarProductos()) {
             jcProducto.addItem(producto);
         }
     }
-    
-    private void borrarFilas(){
-        int f=jtTabla.getRowCount()-1;
-        for(;f>=0;f--){
+
+    private void borrarFilas() {
+        int f = jtTabla.getRowCount() - 1;
+        for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
         jtImporte.setText("");
         suma = 0;
     }
-    
-    private void actualizarStockTabla(int stock){
-        for(int i = 1;i <= stock;i++){
+
+    private void actualizarStockTabla(int stock) {
+        jcStock.removeAllItems();
+        for (int i = 1; i <= stock; i++) {
             jcStock.addItem(i);
         }
-        if (jcStock.getItemCount()!=0){
+        if (jcStock.getItemCount() != 0) {
             jbAgregar.setVisible(true);
             jcStock.setVisible(true);
-        }else{
+        } else {
             jbAgregar.setVisible(false);
             jcStock.setVisible(false);
         }
     }
-    
-    private void actualizarStock(List <Producto> productos, List <Integer> cantidad){
-        int i=0;
-        for(Producto p: productos){
-            p.setStock(p.getStock()-cantidad.get(i));
+
+    private void actualizarStock(List<Producto> productos, List<Integer> cantidad) {
+        int i = 0;
+        for (Producto p : productos) {
+            p.setStock(p.getStock() - cantidad.get(i));
             pc.modificarProducto(p);
             i++;
         }

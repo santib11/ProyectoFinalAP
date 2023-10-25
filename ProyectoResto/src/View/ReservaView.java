@@ -194,6 +194,8 @@ public class ReservaView extends javax.swing.JFrame {
             int confirm = JOptionPane.showConfirmDialog(this, "¿Esta seguro que quiere quitar esta reserva?", "Quitar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (confirm == JOptionPane.YES_NO_OPTION) {
                 int idReserva = (int) jTableReservas.getValueAt(jTableReservas.getSelectedRow(), 0);
+                DefaultTableModel modelo = (DefaultTableModel) jTableReservas.getModel();
+                modelo.removeRow(jTableReservas.getSelectedRow());
                 rController.bajaReserva(idReserva);
                 JOptionPane.showMessageDialog(null, "Reserva cancelada correctamente");
             }
