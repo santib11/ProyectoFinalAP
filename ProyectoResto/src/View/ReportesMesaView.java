@@ -275,8 +275,7 @@ public class ReportesMesaView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void armarCabecera() {
-        modelPedidos.addColumn("Nro Mesa");
-        modelPedidos.addColumn("Capacidad");
+       modelPedidos.addColumn("Mesero");
        modelPedidos.addColumn("Nro Pedido");
         modelPedidos.addColumn("Estado pedido");
         modelPedidos.addColumn("Importe pedido");
@@ -326,18 +325,19 @@ private void cargarTablaPedidoss() {
         //RECORRO
             for (Pedido item : p){
                 String estado = "No entregado";
-                if (item.isEstado()) {
+                if (item.isEstado() && item.isCobrado()) {
                 estado = "Entregado";
             }
                 modelPedidos.addRow(new Object[]{
-                item.getMesa().getIdMesa(),
-                item.getMesa().getCapacidad(),
+                item.getMesero().getNombre(),
                 item.getIdPedido(),
                 estado,
                 item.getImporte()
                 });   
             }
     } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(null, "Por favor ingrese los campos correctos!! ");
+    }catch (NullPointerException e) {
         JOptionPane.showMessageDialog(null, "Por favor ingrese los campos correctos!! ");
     }
 

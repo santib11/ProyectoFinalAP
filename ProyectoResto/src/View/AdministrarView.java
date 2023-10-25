@@ -249,7 +249,7 @@ public class AdministrarView extends javax.swing.JFrame {
         modelPedidos.addColumn("Nro Pedido");
         modelPedidos.addColumn("Nro Mesa");
         modelPedidos.addColumn("Fecha");
-        modelPedidos.addColumn("Entregado");
+        modelPedidos.addColumn("Finalizado");
 
         jTable1.setModel(modelPedidos);
     }
@@ -280,8 +280,8 @@ ese nro como el indice de la ultima fila, borramas las filas de atras para adela
             p = (ArrayList) pc.pedidosxMesero(meseroSelec.getIdMesero());
             for (Pedido item : p) {
                 String estado = "No";
-                if (item.isEstado()) {
-                estado = "Si";
+                if (item.isEstado() && item.isCobrado()) {
+                    estado = "Si";
                 }
                 modelPedidos.addRow(new Object[]{
                     item.getIdPedido(),
@@ -302,8 +302,8 @@ ese nro como el indice de la ultima fila, borramas las filas de atras para adela
 
             for (Pedido item : p) {
                 String estado = "No";
-                if (item.isEstado()) {
-                estado = "Si";
+                if (item.isEstado() && item.isCobrado()) {
+                    estado = "Si";
                 }
                 modelPedidos.addRow(new Object[]{
                     item.getIdPedido(),
