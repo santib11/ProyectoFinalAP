@@ -111,24 +111,24 @@ public class MesaController {
         }
     }
     
-//    public void estadoMesa (Mesa mesa){
-//        String sql = "UPDATE mesa SET estado = ? WHERE numero = ?"; //una lista de mesas y dependiendo de la que eliges le llegue un 0 o 1
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//           
-//            ps.setBoolean(1, mesa.isEstado());
-//            ps.setInt(2, mesa.getNumero());
-//            int exito = ps.executeUpdate();
-//            if (exito == 1) {
-//                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No se pudo modificar");
-//            }
-//    ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa " + ex.getMessage());
-//        }
-//    }
+    public void estadoMesa(Mesa mesa){
+        String sql = "UPDATE mesa SET estado = ? WHERE numero = ?"; //una lista de mesas y dependiendo de la que eliges le llegue un 0 o 1
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+           
+            ps.setBoolean(1, !mesa.isEstado());
+            ps.setInt(2, mesa.getNumero());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Estado de la mesa cambiada!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar");
+            }
+    ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa " + ex.getMessage());
+        }
+    }
     
     public void borrarMesa(int numero){
         String sql = "DELETE FROM mesa WHERE numero = ?";

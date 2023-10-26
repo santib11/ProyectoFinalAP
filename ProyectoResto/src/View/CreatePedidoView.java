@@ -292,7 +292,6 @@ public class CreatePedidoView extends javax.swing.JFrame {
             } else {
                 pedidoc.ingresarPedido(ped, cantidades);
             }
-            //CAMBIAR EL ESTADO DE MESA A OCUPADO
             this.jButtonBackActionPerformed(evt);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar algun producto", "Crear", JOptionPane.WARNING_MESSAGE);
