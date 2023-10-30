@@ -238,13 +238,6 @@ public class CreateProductoView extends javax.swing.JFrame {
                                         //BUSCAR
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try{
-           /* int cod = Integer.parseInt(jtCodigo.getText());
-            ProductoController pc = new ProductoController();
-           prodActual = pc.buscarProducto(cod); 
-            
-            jtNombre.setText(prodActual.getNombre());
-            jtPrecio.setText(prodActual.getPrecio()+"");
-            jtStock.setText(prodActual.getStock() +""); */
             
             int cod = Integer.parseInt(jtCodigo.getText());
             ProductoController pc = new ProductoController();
@@ -256,6 +249,7 @@ public class CreateProductoView extends javax.swing.JFrame {
             
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "El codigo debe estar conformado por numeros", "Editar codigo", JOptionPane.WARNING_MESSAGE);
+        }catch(NullPointerException ex){
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
